@@ -1,0 +1,99 @@
+Quero que modernizes por completo a interface da minha aplicação QZero. A aplicação está com uma aparência antiga, pouco profissional e visualmente desatualizada. Preciso que a Replit IA transforme todo o layout, componentes, popups e elementos visuais numa interface moderna, simples, limpa e atual, seguindo estes requisitos extremamente rígidos:
+
+1. **NÃO modificar nem apagar funcionalidades existentes.**
+   - Toda a lógica e toda a estrutura funcional devem ser mantidas.
+   - Apenas alterar UI/UX, estilos, estrutura visual e componente gráficos.
+
+2. **Modernização da Interface (UI):**
+   - Atualizar completamente o design para um estilo **minimalista e moderno**.
+   - Usar sombras suaves, cantos arredondados, espaçamento consistente e tipografia limpa.
+   - Substituir elementos antigos por versões modernas (inputs, botões, listas, cards, popups, headers).
+   - Cores suaves, paleta moderna, nada exagerado.
+   - Criar hierarquia visual clara: títulos maiores, textos limpos, espaçamentos inteligentes.
+   - Garantir responsividade total (mobile-first).
+
+3. **Popups e Modais:**
+   - Substituir popups antigos por modais modernos com:
+     - fundo escurecido (backdrop),
+     - animação suave de entrada e saída,
+     - botões limpos e minimalistas,
+     - UI centrada e elegante.
+   - Manter tudo simples e rápido.
+
+4. **Layout Geral:**
+   - Normalizar margens, paddings e espaçamentos em todas as páginas.
+   - Atualizar headers, footers, cards, containers e listas para um estilo contemporâneo.
+   - Organizar elementos de forma alinhada e profissional.
+
+5. **Botões:**
+   - Criar botões modernos com:
+     - cantos arredondados,
+     - cores sólidas e/ou degradês suaves,
+     - estados hover e active,
+     - animação mínima mas elegante.
+
+6. **Inputs e Formulários:**
+   - Modernizar inputs:
+     - caixas limpas, bordas suaves,
+     - labels modernas,
+     - highlights em foco,
+     - erros e validações estilizados.
+   - Deixar tudo bonito e profissional.
+
+7. **Componentes visuais:**
+   - Converter elementos antigos em **cards modernos**.
+   - Criar seções claras com divisores suaves.
+   - Aplicar design consistente em todas as páginas.
+
+8. **Tipografia moderna:**
+   - Usar uma fonte atual como:
+     - Inter
+     - Poppins
+     - Nunito
+     - ou similar
+   - Garantir excelente legibilidade.
+
+9. **Página Inicial da App:**
+   - Estruturar de forma mais clara e profissional.
+   - Criar design intuitivo e acolhedor.
+   - Mostrar as funcionalidades de forma organizada.
+
+10. **Painel das Empresas:**
+   - Modernizar todos os layouts:
+     - cards,
+     - filas,
+     - senhas,
+     - botões,
+     - avisos,
+     - tabelas.
+   - Tornar tudo mais intuitivo e profissional.
+
+11. **Painel das Filas e Senhas:**
+   - Criar UI moderna para exibir senhas e chamadas.
+   - Tornar tudo altamente legível e elegante.
+
+12. **Design geral:**
+   - Paleta moderna, consistente em toda a app.
+   - Espaçamento confortável.
+   - Estética 2024-2025.
+   - ZERO aparência de app antiga.
+
+13. **Estrutura de código:**
+   - Se necessário, reorganizar HTML/CSS/JS para melhorar a estrutura, mas SEM alterar funcionalidades.
+   - Pode refatorar CSS para algo limpo e modular.
+   - Evitar repetição de estilos.
+
+14. **Animações modernas:**
+   - Animações suaves (fade in, slide in).
+   - Nada exagerado ou pesado.
+
+15. **Entrega final:**
+   - A Replit deve produzir:
+     - código completo atualizado,
+     - estilos modernizados,
+     - nova interface totalmente funcional,
+     - sem quebrar nada do backend ou lógica.
+   - Manter todo o comportamento original exatamente igual.
+
+⚠️ Instrução final e obrigatória:
+Não simplifiques funcionalidades. Não removas nada que já exista. Mantém toda a lógica intacta. Apenas transforma o design visual da aplicação num layout moderno, limpo, prático e visualmente profissional. A app deve parecer criada em 2025.

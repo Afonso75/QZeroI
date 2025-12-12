@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ativar Empresa - QZero</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-width: 700px; width: 100%; padding: 40px; }
+        h1 { color: #2d3748; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { color: #718096; margin-bottom: 30px; }
+        .company-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; }
+        .company-card h2 { font-size: 24px; margin-bottom: 15px; }
+        .company-info { display: grid; grid-template-columns: auto 1fr; gap: 10px 15px; font-size: 14px; }
+        .company-info strong { opacity: 0.8; }
+        .badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-left: 10px; }
+        .badge.pending { background: #fbbf24; color: #78350f; }
+        .badge.active { background: #10b981; color: white; }
+        button { width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 10px; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
+        button:active { transform: translateY(0); }
+        button.secondary { background: #e2e8f0; color: #2d3748; }
+        button.secondary:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .alert { padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid; }
+        .alert.warning { background: #fef3c7; border-color: #f59e0b; color: #78350f; }
+        .alert.success { background: #d1fae5; border-color: #10b981; color: #065f46; }
+        .alert strong { display: block; margin-bottom: 8px; font-size: 16px; }
+        .step-indicator { display: flex; gap: 10px; margin-bottom: 30px; }
+        .step { flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; }
+        .step.active { background: linear-gradient(90deg, #667eea, #764ba2); }
+        pre { background: #f7fafc; padding: 15px; border-radius: 8px; font-size: 13px; overflow: auto; border: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Ativar Empresa</h1>
+        <p class="subtitle">Vamos ativar a empresa InspirePrint e ligar ao utilizador correto</p>
+        
+        <div class="step-indicator">
+            <div class="step active"></div>
+            <div class="step active"></div>
+            <div class="step"></div>
+        </div>
+        
+        <div id="content">
+            <div class="alert warning">
+                <strong>⚠️ Situação Detectada</strong>
+                A empresa <strong>InspirePrint</strong> está com status "pending_payment" mas deveria estar ativa após o pagamento.
+            </div>
+            
+            <div class="company-card">
+                <h2>InspirePrint <span class="badge pending">Pendente</span></h2>
+                <div class="company-info">
+                    <strong>ID:</strong> <span>company_1763607593377</span>
+                    <strong>Email Admin:</strong> <span>user1763607548430@example.com</span>
+                    <strong>Status:</strong> <span>pending_payment</span>
+                </div>
+            </div>
+            
+            <button onclick="activateCompany()" style="background: #10b981;">
+                ✅ Ativar InspirePrint e Ligar ao Utilizador
+            </button>
+            
+            <button onclick="showDetails()" class="secondary">
+                📊 Ver Detalhes Completos
+            </button>
+            
+            <button onclick="window.location.href='/admin-panel.html'" class="secondary">
+                🔧 Ir para Painel Admin
+            </button>
+        </div>
+        
+        <div id="detailsPanel" style="display:none; margin-top: 20px;">
+            <h3 style="margin-bottom: 15px; color: #2d3748;">📋 Dados do Sistema</h3>
+            <pre id="detailsContent"></pre>
+        </div>
+    </div>
+    
+    <script>
+        function activateCompany() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            // Procurar o perfil InspirePrint
+            const inspirePrint = profiles.find(p => p.companyName === 'InspirePrint' || p.id === 'company_1763607593377');
+            
+            if (!inspirePrint) {
+                alert('❌ Empresa InspirePrint não encontrada nos dados locais!\n\nTalvez os dados foram limpos. Verifica o painel admin.');
+                window.location.href = '/admin-panel.html';
+                return;
+            }
+            
+            console.log('🔧 Ativando InspirePrint...');
+            console.log('Antes:', inspirePrint);
+            
+            // ATIVAR o perfil
+            inspirePrint.status = 'active';
+            inspirePrint.subscriptionStatus = 'active';
+            inspirePrint.adminUserId = user.email; // Garantir que está ligado ao utilizador atual
+            
+            // Guardar perfis atualizados
+            localStorage.setItem('company_profiles', JSON.stringify(profiles));
+            
+            // Atualizar utilizador
+            user.has_business_subscription = true;
+            user.business_profile_completed = true;
+            user.business_id = inspirePrint.id;
+            user.account_type = 'empresa';
+            user.onboarding_completed = true;
+            
+            localStorage.setItem('mock_user', JSON.stringify(user));
+            
+            console.log('✅ InspirePrint ativada!');
+            console.log('Depois:', inspirePrint);
+            console.log('Utilizador:', user);
+            
+            // Mostrar mensagem de sucesso
+            document.getElementById('content').innerHTML = `
+                <div class="alert success">
+                    <strong>✅ InspirePrint Ativada com Sucesso!</strong>
+                    A empresa foi ativada e ligada ao utilizador atual.
+                </div>
+                
+                <div class="company-card" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <h2>InspirePrint <span class="badge active">Ativo</span></h2>
+                    <div class="company-info">
+                        <strong>ID:</strong> <span>${inspirePrint.id}</span>
+                        <strong>Email Admin:</strong> <span>${user.email}</span>
+                        <strong>Status:</strong> <span>active ✅</span>
+                        <strong>Subscrição:</strong> <span>active ✅</span>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; color: #718096; margin: 25px 0;">
+                    A redirecionar para o Dashboard Empresarial em <span id="countdown">3</span> segundos...
+                </p>
+            `;
+            
+            // Countdown
+            let seconds = 3;
+            const countdownEl = document.getElementById('countdown');
+            const interval = setInterval(() => {
+                seconds--;
+                if (countdownEl) countdownEl.textContent = seconds;
+                if (seconds === 0) {
+                    clearInterval(interval);
+                    window.location.href = '/';
+                }
+            }, 1000);
+        }
+        
+        function showDetails() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            const details = {
+                utilizador_atual: user,
+                perfis_empresa: profiles
+            };
+            
+            document.getElementById('detailsContent').textContent = JSON.stringify(details, null, 2);
+            document.getElementById('detailsPanel').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

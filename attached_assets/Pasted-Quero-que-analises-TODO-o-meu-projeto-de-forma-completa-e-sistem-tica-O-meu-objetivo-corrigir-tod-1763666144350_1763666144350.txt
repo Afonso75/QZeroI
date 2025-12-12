@@ -1,0 +1,98 @@
+Quero que analises TODO o meu projeto de forma completa e sistemática.
+O meu objetivo é corrigir todos os bugs, otimizar o código, melhorar estabilidade, limpar código morto, e modernizar pequenos aspetos visuais, mas SEM ALTERAR AS FUNCIONALIDADES, SEM APAGAR NADA e SEM QUEBRAR NADA QUE JÁ FUNCIONE.
+
+Segue estas regras com 100% de rigor:
+
+🔒 REGRAS OBRIGATÓRIAS
+
+NÃO podes alterar, reestruturar ou remover funcionalidades existentes.
+
+NÃO podes apagar ficheiros, componentes, rotas, funções ou bases de dados.
+
+NÃO podes alterar endpoints nem lógica de negócio sem verificar comigo.
+
+NÃO podes refazer layouts por completo — apenas melhorar visual e organização, mantendo tudo igual em comportamento.
+
+Cada alteração deve manter TOTAL compatibilidade com o código existente.
+
+🔍 O QUE DEVES FAZER
+
+Analisa tudo: front-end, back-end, base de dados, componentes, APIs.
+
+Procura:
+
+erros de consola
+
+erros de runtime
+
+erros de compilação
+
+imports quebrados
+
+rotas incorretas
+
+variáveis não definidas
+
+componentes que falham
+
+erros de estado ou assincronismo
+
+problemas com formulários
+
+bugs em validações
+
+problemas visuais simples
+
+UI desalinhada
+
+Corrige SEM MUDAR o comportamento original.
+
+💄 MELHORIAS PERMITIDAS
+
+Podes melhorar apenas isto:
+
+Organização visual do código (indentação, imports, limpeza de warnings)
+
+Interfaces modernas sem alterar estrutura
+
+Correções de estilos quebrados
+
+Melhor performance (sem novas dependências exceto se for crítico)
+
+Melhor acessibilidade e responsividade
+
+🚫 PROIBIDO
+
+Mudar a estrutura geral da aplicação
+
+Reescrever tudo do zero
+
+Alterar design principal sem minha autorização
+
+Substituir bibliotecas ou trocar frameworks
+
+Criar dependências novas sem justificar
+
+✔ PROCESSO DE TRABALHO QUE DEVE SEGUIR
+
+Verifica o projeto inteiro e cria uma lista de todos os problemas encontrados.
+
+Organiza os problemas por prioridade (crítico, médio, baixo).
+
+Explica claramente cada causa.
+
+APENAS depois de listar → começa a corrigir um por um.
+
+Cada correção deve:
+
+explicar o que mudou
+
+indicar se há risco de quebra
+
+mostrar o código antes/depois
+
+No final: corre testes, verifica dependências e confirma que nada foi quebrado.
+
+🎯 OBJETIVO FINAL
+
+Quero o meu projeto totalmente funcional, estável, rápido, sem bugs e com um aspeto limpo e moderno mas sem me alterar nada importante.

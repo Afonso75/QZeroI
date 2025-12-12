@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QZero - Criar Nova Conta</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    p {
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .option:hover {
+      border-color: #667eea;
+      background: #f0f4ff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+    .option h3 {
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+    .option p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+    .btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    .btn-danger {
+      background: #dc3545;
+      margin-top: 12px;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    .divider {
+      height: 1px;
+      background: #e9ecef;
+      margin: 30px 0;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎭 Criar Nova Conta</h1>
+    <p>Simula um novo utilizador para testar o onboarding e funcionalidades do QZero.</p>
+    
+    <div class="option" onclick="createPersonalAccount()">
+      <h3>👤 Nova Conta Pessoal</h3>
+      <p>Cria um utilizador normal que pode retirar senhas e fazer marcações</p>
+    </div>
+    
+    <div class="option" onclick="createBusinessAccount()">
+      <h3>🏢 Nova Conta Empresarial</h3>
+      <p>Cria um dono de empresa que passa pelo processo de subscrição</p>
+    </div>
+    
+    <div class="option" onclick="createBothAccount()">
+      <h3>⚖️ Conta Ambos (Pessoal + Empresa)</h3>
+      <p>Utilizador pode alternar entre modo pessoal e empresarial</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="btn" onclick="createCustomAccount()">
+      ✏️ Criar Conta Personalizada
+    </button>
+
+    <button class="btn btn-danger" onclick="clearEverything()">
+      🧹 Limpar TUDO (Reset Completo)
+    </button>
+
+    <div class="back-link">
+      <a href="/">← Voltar para a aplicação</a>
+    </div>
+  </div>
+
+  <script>
+    function createNewUser(accountType = null, name = 'Novo Utilizador') {
+      const newUser = {
+        id: `user_${Date.now()}`,
+        name: name,
+        email: `user${Date.now()}@example.com`,
+        account_type: accountType,
+        onboarding_completed: false,
+        has_business_subscription: false,
+        business_profile_completed: false,
+        business_id: null,
+        is_business_user: false,
+        country: 'PT',
+        city: 'Lisboa',
+        latitude: 38.7223,
+        longitude: -9.1393,
+        profile_completed: false
+      };
+      
+      localStorage.removeItem('mock_user');
+      localStorage.removeItem('company_profile');
+      localStorage.removeItem('currentMode');
+      localStorage.setItem('mock_user', JSON.stringify(newUser));
+      
+      console.log('✅ Nova conta criada:', newUser);
+      
+      alert(`✅ Conta criada!\n\nEmail: ${newUser.email}\nTipo: ${accountType || 'A escolher no onboarding'}\n\nSerás redirecionado...`);
+      
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    }
+
+    function createPersonalAccount() {
+      createNewUser('pessoal', 'Utilizador Pessoal');
+    }
+
+    function createBusinessAccount() {
+      createNewUser('empresa', 'Dono de Empresa');
+    }
+
+    function createBothAccount() {
+      createNewUser('ambos', 'Utilizador Completo');
+    }
+
+    function createCustomAccount() {
+      const name = prompt('Nome do utilizador:', 'Maria Silva');
+      if (!name) return;
+      
+      const types = ['pessoal', 'empresa', 'ambos', 'escolher'];
+      const typeChoice = prompt(
+        'Tipo de conta:\n' +
+        '1 - Pessoal\n' +
+        '2 - Empresa\n' +
+        '3 - Ambos\n' +
+        '4 - Escolher no onboarding',
+        '4'
+      );
+      
+      const typeIndex = parseInt(typeChoice) - 1;
+      const accountType = typeIndex === 3 ? null : types[typeIndex];
+      
+      if (typeIndex < 0 || typeIndex > 3) {
+        alert('Opção inválida!');
+        return;
+      }
+      
+      createNewUser(accountType, name);
+    }
+
+    function clearEverything() {
+      const confirm = window.confirm(
+        '⚠️ ATENÇÃO!\n\n' +
+        'Isto vai APAGAR TUDO:\n' +
+        '• Utilizador atual\n' +
+        '• Todas as empresas\n' +
+        '• Todas as filas\n' +
+        '• Todas as senhas\n' +
+        '• Todas as marcações\n' +
+        '• Todos os serviços\n\n' +
+        'Tens a certeza?'
+      );
+      
+      if (!confirm) return;
+      
+      const keys = [
+        'mock_user',
+        'mock_tickets', 
+        'mock_queues', 
+        'mock_businesses', 
+        'mock_appointments', 
+        'mock_subscriptions', 
+        'mock_services', 
+        'company_profile',
+        'currentMode'
+      ];
+      
+      keys.forEach(key => localStorage.removeItem(key));
+      
+      console.log('🧹 TUDO foi limpo!');
+      alert('✅ Todos os dados foram apagados!\n\nVais ser redirecionado para uma aplicação limpa.');
+      
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suporte - QZero</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      max-width: 520px;
+      width: 100%;
+      padding: 40px;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo h1 {
+      font-size: 32px;
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+    
+    .logo span {
+      color: #3b82f6;
+    }
+    
+    h2 {
+      color: #1e3a5f;
+      font-size: 24px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .info-box p {
+      color: #1e40af;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .info-box .email-link {
+      display: block;
+      margin-top: 8px;
+      color: #3b82f6;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    
+    .info-box .email-link:hover {
+      text-decoration: underline;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    
+    label .required {
+      color: #dc2626;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .btn-primary:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #374151;
+      margin-top: 12px;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .message {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .message.success {
+      background: #d1fae5;
+      border: 1px solid #6ee7b7;
+      color: #065f46;
+      display: block;
+    }
+    
+    .message.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      display: block;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .success-section {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    .success-section.active {
+      display: block;
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #d1fae5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      color: #059669;
+    }
+    
+    .success-section h3 {
+      color: #059669;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    
+    .success-section p {
+      color: #64748b;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .form-section.hidden {
+      display: none;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .footer a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .hours-info {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .hours-item {
+      flex: 1;
+      min-width: 140px;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .hours-item strong {
+      display: block;
+      color: #1e3a5f;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    
+    .hours-item span {
+      color: #64748b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <h1>Q<span>Zero</span></h1>
+    </div>
+    
+    <div id="message" class="message"></div>
+    
+    <!-- Formulario de Contacto -->
+    <div id="form-section" class="form-section">
+      <h2>Contacte-nos</h2>
+      <p class="subtitle">Estamos aqui para ajudar. Responderemos em 24 horas.</p>
+      
+      <div class="info-box">
+        <p>Pode tambem contactar-nos diretamente por email:</p>
+        <a href="mailto:suporteqzero@gmail.com" class="email-link">suporteqzero@gmail.com</a>
+        
+        <div class="hours-info">
+          <div class="hours-item">
+            <strong>Segunda a Sexta</strong>
+            <span>9h - 18h</span>
+          </div>
+          <div class="hours-item">
+            <strong>Fim de Semana</strong>
+            <span>Fechado</span>
+          </div>
+        </div>
+      </div>
+      
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Nome <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="O seu nome">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Assunto</label>
+          <select id="subject" name="subject">
+            <option value="">Selecione um assunto...</option>
+            <option value="Duvida tecnica">Duvida tecnica</option>
+            <option value="Problema com a aplicacao">Problema com a aplicacao</option>
+            <option value="Subscricao e pagamentos">Subscricao e pagamentos</option>
+            <option value="Sugestao de melhoria">Sugestao de melhoria</option>
+            <option value="Pedido de funcionalidade">Pedido de funcionalidade</option>
+            <option value="Outro">Outro assunto</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Mensagem <span class="required">*</span></label>
+          <textarea id="message-input" name="message" required placeholder="Descreva a sua questao ou sugestao em detalhe..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Enviar Mensagem
+        </button>
+      </form>
+      
+      <div class="footer">
+        <a href="/">Voltar para a aplicacao</a>
+      </div>
+    </div>
+    
+    <!-- Sucesso -->
+    <div id="success-section" class="success-section">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3>Mensagem Enviada!</h3>
+      <p>
+        Obrigado pelo seu contacto.<br>
+        Responderemos para o seu email em breve.
+      </p>
+      
+      <button type="button" class="btn btn-secondary" onclick="resetForm()">
+        Enviar outra mensagem
+      </button>
+      
+      <div class="footer">
+        <a href="/">Voltar para a aplicacao</a>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const API_BASE = '';
+    const form = document.getElementById('contact-form');
+    const formSection = document.getElementById('form-section');
+    const successSection = document.getElementById('success-section');
+    const messageDiv = document.getElementById('message');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message-input').value.trim();
+      
+      if (!name || !email || !message) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = 'Por favor, preencha todos os campos obrigatorios.';
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> A enviar...';
+      messageDiv.style.display = 'none';
+      
+      try {
+        const response = await fetch(API_BASE + '/api/public/support/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          formSection.classList.add('hidden');
+          successSection.classList.add('active');
+        } else {
+          throw new Error(data.error || 'Erro ao enviar mensagem');
+        }
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = error.message || 'Erro ao enviar mensagem. Tente novamente.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Enviar Mensagem
+        `;
+      }
+    });
+    
+    function resetForm() {
+      form.reset();
+      formSection.classList.remove('hidden');
+      successSection.classList.remove('active');
+      messageDiv.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

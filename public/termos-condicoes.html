@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - QZero</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 120px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 10px;
+        }
+        h2 { color: #1e40af; margin-top: 30px; }
+        h3 { color: #1e3a8a; }
+        ul { margin-left: 20px; }
+        .meta {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 4px solid #2563eb;
+            margin-bottom: 30px;
+        }
+        .meta strong { color: #1e40af; }
+        .accept-button-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .accept-button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .accept-button:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        .accept-button:active {
+            transform: translateY(0);
+        }
+        .accept-button.accepted {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        }
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 0.5s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .success-title {
+            color: #16a34a;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .success-text {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            max-width: 300px;
+        }
+        .close-button {
+            padding: 16px 50px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .close-button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TERMS & CONDITIONS — QZERO</h1>
+        
+        <div class="meta">
+            <strong>Last Updated:</strong> 24/11/2025
+        </div>
+        
+        <p>These Terms govern the use of the QZero application ("the Service"), created and operated by an independent developer ("the Operator").</p>
+        
+        <p><strong>By creating an account, you agree to these Terms.</strong></p>
+        
+        <hr>
+        
+        <h2>1. Overview of the Service</h2>
+        
+        <h3>1.1. For Customers</h3>
+        <p>Customers can:</p>
+        <ul>
+            <li>View available businesses</li>
+            <li>Take digital tickets</li>
+            <li>Make bookings</li>
+            <li>Track queue status in real time</li>
+            <li>Leave reviews</li>
+        </ul>
+        
+        <h3>1.2. For Businesses</h3>
+        <p>Business accounts can access:</p>
+        <ul>
+            <li>Queue management</li>
+            <li>Service scheduling</li>
+            <li>Analytics dashboards</li>
+            <li>Team management</li>
+        </ul>
+        <p><strong>Business access requires a paid subscription.</strong></p>
+        
+        <h2>2. Subscription & Payment</h2>
+        <ul>
+            <li>Business accounts require a monthly paid subscription</li>
+            <li>Payments are securely processed via Stripe</li>
+            <li>Users may cancel anytime, retaining access until the billing period ends</li>
+            <li>No refunds for partial billing periods</li>
+        </ul>
+        
+        <h2>3. User Responsibilities</h2>
+        <p>All users must:</p>
+        <ul>
+            <li>Provide accurate information</li>
+            <li>Not misuse the platform</li>
+        </ul>
+        <p>Businesses must also:</p>
+        <ul>
+            <li>Provide accurate information about services</li>
+            <li>Respect customer privacy</li>
+            <li>Not manipulate queues or data</li>
+        </ul>
+
+        <h2>4. Prohibited Activities</h2>
+        <p>Users may NOT:</p>
+        <ul>
+            <li>Attempt to manipulate the queue</li>
+            <li>Use bots or fraudulent tools</li>
+            <li>Access accounts of other users</li>
+            <li>Interfere with the Service</li>
+            <li>Submit false information</li>
+        </ul>
+
+        <h2>5. Limitation of Liability</h2>
+        <p>The Operator is not responsible for:</p>
+        <ul>
+            <li>Internet connection issues</li>
+            <li>Device failures</li>
+            <li>Mistakes made by businesses in scheduling or queue management</li>
+            <li>Late arrivals or customer no-shows</li>
+            <li>Business-specific rules (prices, service details, tolerance times)</li>
+            <li>Any data entered by businesses or customers themselves</li>
+        </ul>
+        <p><strong>The Service is provided "as is" without warranties of uninterrupted availability.</strong></p>
+
+        <h2>6. Intellectual Property</h2>
+        <p>All content, code, design, brand name "QZero", and system architecture belong to the Operator.</p>
+
+        <h2>7. Account Termination</h2>
+        <p>We may suspend or terminate accounts that violate these Terms.</p>
+        <p>Users may delete their accounts at any time.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These Terms are governed by the laws of Portugal.</p>
+        <p>Any disputes will be handled by Portuguese courts.</p>
+    </div>
+
+    <div class="accept-button-container">
+        <button class="accept-button" id="acceptBtn">
+            ✓ ACCEPT AND CONTINUE
+        </button>
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-icon">✅</div>
+        <h2 class="success-title">Terms Accepted!</h2>
+        <p class="success-text">You can now close this page and return to the registration.</p>
+        <button class="close-button" id="closeBtn">CLOSE THIS PAGE</button>
+    </div>
+
+    <script>
+        (function() {
+            var acceptBtn = document.getElementById('acceptBtn');
+            var successOverlay = document.getElementById('successOverlay');
+            var closeBtn = document.getElementById('closeBtn');
+
+            acceptBtn.addEventListener('click', function() {
+                try {
+                    localStorage.setItem('qzero_terms_accepted', 'true');
+                    localStorage.setItem('qzero_terms_accepted_time', new Date().toISOString());
+                } catch(e) {
+                    console.log('localStorage not available');
+                }
+
+                acceptBtn.innerHTML = '✅ ACCEPTED!';
+                acceptBtn.classList.add('accepted');
+                acceptBtn.disabled = true;
+
+                try {
+                    if (window.opener) {
+                        window.opener.postMessage({ type: 'terms-accepted' }, '*');
+                    }
+                    if (window.parent !== window) {
+                        window.parent.postMessage({ type: 'terms-accepted' }, '*');
+                    }
+                } catch(e) {}
+
+                setTimeout(function() {
+                    successOverlay.style.display = 'flex';
+                }, 300);
+            });
+
+            closeBtn.addEventListener('click', function() {
+                try { window.close(); } catch(e) {}
+                
+                setTimeout(function() {
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '/register';
+                    }
+                }, 100);
+            });
+        })();
+    </script>
+</body>
+</html>

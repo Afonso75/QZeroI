@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painel Admin - QZero</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui; background: #0f172a; color: #e2e8f0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #38bdf8; margin-bottom: 30px; font-size: 32px; }
+        .section { background: #1e293b; padding: 25px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #334155; }
+        h2 { color: #38bdf8; margin-bottom: 15px; font-size: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #334155; padding: 12px; text-align: left; color: #38bdf8; font-weight: 600; }
+        td { padding: 12px; border-top: 1px solid #334155; }
+        tr:hover { background: #2d3748; }
+        button { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; margin: 5px; font-weight: 500; transition: all 0.2s; }
+        button:hover { background: #2563eb; transform: translateY(-1px); }
+        button.success { background: #10b981; }
+        button.success:hover { background: #059669; }
+        button.danger { background: #ef4444; }
+        button.danger:hover { background: #dc2626; }
+        button.warning { background: #f59e0b; }
+        button.warning:hover { background: #d97706; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge.active { background: #10b981; color: white; }
+        .badge.pending { background: #f59e0b; color: white; }
+        .badge.inactive { background: #6b7280; color: white; }
+        pre { background: #0f172a; padding: 15px; border-radius: 6px; overflow: auto; font-size: 12px; border: 1px solid #334155; }
+        .actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid; }
+        .alert.info { background: #1e3a8a; border-color: #3b82f6; }
+        .alert.success { background: #064e3b; border-color: #10b981; }
+        .alert.warning { background: #78350f; border-color: #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Painel de Administração - QZero</h1>
+        
+        <div id="alerts"></div>
+        
+        <div class="section">
+            <h2>👤 Utilizador Atual</h2>
+            <div id="userInfo"></div>
+            <div class="actions">
+                <button onclick="linkToActiveProfile()" class="success">✅ Ligar ao Perfil Ativo</button>
+                <button onclick="showRawData()" class="warning">📋 Ver Dados Raw</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🏢 Perfis de Empresa</h2>
+            <div id="profilesInfo"></div>
+        </div>
+        
+        <div class="section">
+            <h2>🛠️ Ações Rápidas</h2>
+            <div class="actions">
+                <button onclick="window.location.href='/reset.html'">🔄 Ir para Reset</button>
+                <button onclick="window.location.href='/'">🏠 Ir para Home</button>
+                <button onclick="location.reload()">♻️ Recarregar Página</button>
+            </div>
+        </div>
+        
+        <div id="rawData" class="section" style="display:none;">
+            <h2>📋 Dados Raw</h2>
+            <pre id="rawDataContent"></pre>
+        </div>
+    </div>
+    
+    <script>
+        function loadData() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            // User Info
+            let userHtml = '<table>';
+            userHtml += '<tr><th>Campo</th><th>Valor</th></tr>';
+            userHtml += `<tr><td><strong>Email</strong></td><td>${user.email || 'N/A'}</td></tr>`;
+            userHtml += `<tr><td><strong>Nome</strong></td><td>${user.full_name || 'N/A'}</td></tr>`;
+            userHtml += `<tr><td><strong>Tipo de Conta</strong></td><td>${user.account_type || 'N/A'}</td></tr>`;
+            userHtml += `<tr><td><strong>Tem Subscrição</strong></td><td>${user.has_business_subscription ? '<span class="badge active">Sim</span>' : '<span class="badge inactive">Não</span>'}</td></tr>`;
+            userHtml += `<tr><td><strong>Perfil Completo</strong></td><td>${user.business_profile_completed ? '<span class="badge active">Sim</span>' : '<span class="badge inactive">Não</span>'}</td></tr>`;
+            userHtml += `<tr><td><strong>Business ID</strong></td><td>${user.business_id || 'N/A'}</td></tr>`;
+            userHtml += `<tr><td><strong>Onboarding Completo</strong></td><td>${user.onboarding_completed ? '<span class="badge active">Sim</span>' : '<span class="badge inactive">Não</span>'}</td></tr>`;
+            userHtml += '</table>';
+            document.getElementById('userInfo').innerHTML = userHtml;
+            
+            // Profiles Info
+            let profilesHtml = '';
+            if (profiles.length === 0) {
+                profilesHtml = '<p style="color: #94a3b8;">Nenhum perfil de empresa encontrado</p>';
+            } else {
+                profilesHtml = '<table>';
+                profilesHtml += '<tr><th>Nome</th><th>ID</th><th>Status</th><th>Admin Email</th><th>Features</th></tr>';
+                profiles.forEach(p => {
+                    const statusBadge = p.status === 'active' ? 'active' : p.status === 'pending_payment' ? 'pending' : 'inactive';
+                    const featuresBadge = p.featuresEnabled ? 'active' : 'inactive';
+                    profilesHtml += `<tr>
+                        <td><strong>${p.companyName}</strong></td>
+                        <td><code>${p.id}</code></td>
+                        <td><span class="badge ${statusBadge}">${p.status}</span></td>
+                        <td>${p.adminUserId}</td>
+                        <td><span class="badge ${featuresBadge}">${p.featuresEnabled ? 'Ativo' : 'Inativo'}</span></td>
+                    </tr>`;
+                });
+                profilesHtml += '</table>';
+            }
+            document.getElementById('profilesInfo').innerHTML = profilesHtml;
+            
+            // Check for issues
+            const activeProfile = profiles.find(p => p.status === 'active');
+            let alertsHtml = '';
+            
+            if (activeProfile && activeProfile.adminUserId !== user.email) {
+                alertsHtml += `
+                    <div class="alert warning">
+                        <strong>⚠️ Discrepância Detectada!</strong><br>
+                        O perfil ativo pertence a <code>${activeProfile.adminUserId}</code> mas o utilizador atual é <code>${user.email}</code>.<br>
+                        Clica em "✅ Ligar ao Perfil Ativo" para corrigir automaticamente.
+                    </div>
+                `;
+            }
+            
+            if (activeProfile && !user.has_business_subscription) {
+                alertsHtml += `
+                    <div class="alert warning">
+                        <strong>⚠️ Utilizador sem Subscrição!</strong><br>
+                        Existe um perfil ativo mas o utilizador não tem as flags de subscrição.<br>
+                        Clica em "✅ Ligar ao Perfil Ativo" para corrigir.
+                    </div>
+                `;
+            }
+            
+            if (!activeProfile && profiles.length > 0) {
+                alertsHtml += `
+                    <div class="alert info">
+                        <strong>ℹ️ Perfis Pendentes</strong><br>
+                        Existem ${profiles.length} perfil(s) mas nenhum está ativo. Verifique o pagamento.
+                    </div>
+                `;
+            }
+            
+            if (activeProfile && user.has_business_subscription && activeProfile.adminUserId === user.email) {
+                alertsHtml += `
+                    <div class="alert success">
+                        <strong>✅ Tudo OK!</strong><br>
+                        O utilizador está corretamente ligado ao perfil ativo.
+                    </div>
+                `;
+            }
+            
+            document.getElementById('alerts').innerHTML = alertsHtml;
+        }
+        
+        function linkToActiveProfile() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            const activeProfile = profiles.find(p => p.status === 'active');
+            
+            if (!activeProfile) {
+                alert('❌ Nenhum perfil ativo encontrado!');
+                return;
+            }
+            
+            // Corrigir email do perfil
+            activeProfile.adminUserId = user.email;
+            
+            // Atualizar perfis
+            localStorage.setItem('company_profiles', JSON.stringify(profiles));
+            
+            // Atualizar utilizador
+            user.has_business_subscription = true;
+            user.business_profile_completed = true;
+            user.business_id = activeProfile.id;
+            user.account_type = 'empresa';
+            user.onboarding_completed = true;
+            
+            localStorage.setItem('mock_user', JSON.stringify(user));
+            
+            alert('✅ Perfil ligado com sucesso!\n\nUtilizador: ' + user.email + '\nPerfil: ' + activeProfile.companyName + '\n\nA redirecionar...');
+            
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
+        }
+        
+        function showRawData() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            const rawData = {
+                user: user,
+                profiles: profiles
+            };
+            
+            document.getElementById('rawDataContent').textContent = JSON.stringify(rawData, null, 2);
+            document.getElementById('rawData').style.display = 'block';
+        }
+        
+        // Carregar dados ao abrir a página
+        loadData();
+    </script>
+</body>
+</html>

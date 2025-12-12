@@ -1,0 +1,51 @@
+Quero que cries um componente React chamado PainelTV.jsx.
+
+Este painel NÃO é uma página principal, NÃO tem botões, NÃO tem navegação, NÃO tem controlos, NÃO tem interações, NÃO tem sidebar nem header, NÃO tem chamadas manuais. 
+Quero-o extremamente simples e limpo.
+
+OBJETIVO DO PAINEL:
+Apenas mostrar, em ecrã inteiro, as senhas que estão atualmente na fila.
+Nada mais.
+
+REQUISITOS (OBRIGATÓRIOS):
+1. O painel deve ser um componente React chamado PainelTV.jsx.
+2. O layout deve ser 100% fullscreen, com fundo limpo (pode ser branco ou preto).
+3. Apenas deve aparecer:
+   - Um título grande: "Senhas na Fila"
+   - A lista das senhas atuais, cada uma em fonte gigante e muito legível.
+4. A lista deve vir de APENAS UMA destas formas:
+   a) Se existir API no projeto: fazer GET para /api/filas (ou endpoint equivalente).
+   b) Se NÃO existir API: cria um mock simples dentro do componente (ex: const filas = [{codigo: "A37"}];)
+5. A lista deve ser ordenada pela ordem em que as senhas entraram (primeiro as mais antigas).
+6. O painel deve atualizar automaticamente a cada 5 segundos.
+7. Se a fila estiver vazia, deve aparecer apenas a frase:
+   "Nenhuma senha na fila."
+8. O painel NÃO pode ter:
+   - Botões
+   - Links
+   - Funções interativas
+   - Inputs
+   - Navegação
+   - Lógica que não seja para ler e mostrar as senhas
+   - Chamada de senhas
+   - Avisos sonoros
+   - Outras páginas
+   - Código morto ou inventado
+9. Cria também um ficheiro CSS chamado PainelTV.css, com:
+   - Texto gigante (bem visível numa televisão)
+   - Centralização vertical e horizontal
+   - Estilo simples e sem erros
+10. O painel deve ser totalmente funcional sem erros de importação, sem dependências externas e sem código desnecessário.
+11. Por fim, adiciona a rota /painel-tv no router existente, apontando apenas para o componente PainelTV.
+
+SEJA EXTREMAMENTE RÍGIDO:
+- Não inventes funcionalidades.
+- Não cries lógica extra.
+- Não cries outra página.
+- Não cries componentes adicionais.
+- Não cries backend.
+- Não cries painel avançado.
+- NÃO faças nada além de:
+  PainelTV.jsx + PainelTV.css + a rota /painel-tv.
+
+Cria agora o código totalmente limpo, funcional e sem erros.

@@ -1,0 +1,91 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment and secrets
+.env
+.env.*
+*.env
+
+# Uploads
+uploads/
+
+# Capacitor - Sensitive files only (ios/ and android/ ARE tracked)
+# Signing keys and certificates
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig
+*.orig.*
+web-build/
+
+# Android specific sensitive files
+android/app/*.jks
+android/*.properties
+android/local.properties
+android/app/google-services.json
+android/keystore.properties
+
+# iOS specific sensitive files
+ios/App/App/GoogleService-Info.plist
+ios/*.xcuserstate
+ios/**/*.xcuserstate
+ios/App/Pods/
+
+# Build artifacts
+android/app/build/
+android/.gradle/
+ios/App/build/
+ios/DerivedData/
+
+# Documentation with sensitive information (API keys, secrets, production config)
+# All internal documentation files
+STRIPE_*.md
+SECURITY_*.md
+PRODUCTION_*.md
+*PRODUCAO*.md
+*SECRETS*.md
+GUIA_*.md
+DEPLOY_*.md
+RESTRINGIR_*.md
+TESTE_*.md
+INSTRUCOES_*.md
+UNPUBLISH_*.md
+BUGFIX_*.md
+CAPACITOR_*.md
+ESLINT_*.md
+LIMPAR_*.md
+COMO*.md
+docs/
+
+# Keep only README.md and replit.md
+
+# Firebase/Google configuration files with API keys
+attached_assets/*firebase*.json
+attached_assets/*google*.json
+attached_assets/*GoogleService*.plist
+**/google-services.json
+**/GoogleService-Info.plist

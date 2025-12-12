@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">QZero</string>
+    <string name="title_activity_main">QZero</string>
+    <string name="package_name">com.qzero.app</string>
+    <string name="custom_url_scheme">com.qzero.app</string>
+</resources>

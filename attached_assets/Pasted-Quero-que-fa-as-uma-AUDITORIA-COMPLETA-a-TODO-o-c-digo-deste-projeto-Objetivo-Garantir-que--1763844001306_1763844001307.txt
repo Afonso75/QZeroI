@@ -1,0 +1,181 @@
+Quero que faças uma AUDITORIA COMPLETA a TODO o código deste projeto.
+
+Objetivo:
+Garantir que:
+- NÃO existem fugas de dados,
+- NÃO existem dados sensíveis expostos,
+- NÃO existem bugs críticos,
+- O código está o mais seguro e estável possível,
+SEM quebrar funcionalidades que já estão a funcionar.
+
+────────────────────────
+REGRAS OBRIGATÓRIAS
+────────────────────────
+1. NÃO podes apagar ficheiros sem necessidade extrema.
+2. NÃO podes mudar a lógica de negócio (fluxos principais) sem uma razão técnica muito forte.
+3. NÃO podes remover funcionalidades que já existem.
+4. Todas as alterações devem ser:
+   - Justificadas,
+   - Documentadas,
+   - Testadas.
+5. Se uma correção for arriscada (pode mudar comportamento), deves:
+   - Explicar o risco,
+   - Sugerir a correção,
+   - E só aplicar se for claramente segura.
+
+────────────────────────
+FASE 1 — ANÁLISE GLOBAL DO CÓDIGO
+────────────────────────
+1. Faz uma leitura geral do projeto:
+   - Identifica stack (frontend, backend, BD, libs).
+   - Lista ficheiros principais: frontend, backend, config, env, serviços externos.
+2. Procura problemas em:
+   - Autenticação,
+   - Autorização (permissões),
+   - Gestão de sessões / tokens (JWT),
+   - Comunicações com APIs externas,
+   - Acesso à base de dados,
+   - Upload de ficheiros,
+   - Logs.
+
+Quero um resumo inicial com:
+- Tecnologias usadas (React / Node / Express / etc),
+- Partes mais sensíveis (auth, pagamentos, perfis, etc),
+- Áreas com potencial risco.
+
+────────────────────────
+FASE 2 — FUGAS DE DADOS E PRIVACIDADE
+────────────────────────
+Analisa linha a linha (na medida do possível) à procura de:
+
+1. Dados sensíveis expostos:
+   - Chaves API,
+   - Segredos (Stripe, JWT, DB),
+   - Passwords hardcoded,
+   - Tokens em código,
+   - URLs privadas ou endpoints internos.
+
+2. Fugas potenciais:
+   - Dados de utilizadores enviados para o frontend sem necessidade,
+   - Logs que imprimem dados pessoais (nome, email, telefone, tokens),
+   - Erros que devolvem stack traces completos para o cliente,
+   - Respostas de API que enviam mais campos do que o necessário.
+
+3. Problemas de env vars:
+   - Qualquer valor sensível deve estar em variáveis de ambiente,
+   - Substituir valores hardcoded por process.env (ou equivalente),
+   - Documentar quais env vars são necessárias.
+
+Para cada problema encontrado:
+- Explica onde está (ficheiro + linha),
+- Explica porque é uma fuga ou risco,
+- Aplica correção segura (quando possível),
+- Mostra o “ANTES” e “DEPOIS” do código.
+
+────────────────────────
+FASE 3 — SEGURANÇA (BACKEND)
+────────────────────────
+Verifica e melhora:
+
+1. Validação de input:
+   - Todas as rotas que recebem dados externos (forms, APIs) DEVEM ter validação forte (tipos, tamanhos, formatos),
+   - Sanitização contra XSS, SQL Injection, NoSQL Injection.
+
+2. Autenticação / Autorização:
+   - Rotas protegidas verificam token/ sessão?
+   - Não há endpoints sensíveis sem proteção?
+   - Não se expõe userId / companyId de forma insegura?
+
+3. Erros:
+   - Não devolver erros internos detalhados para o cliente,
+   - Só mensagens genéricas para o utilizador,
+   - Logs mais completos só no servidor.
+
+4. Rate limiting / brute force:
+   - Verificar se existe proteção contra muitas tentativas de login,
+   - Se não existir, sugerir/implementar middleware de rate-limit.
+
+5. Headers de segurança:
+   - Sugerir/implementar utilização de Helmet (ou equivalente),
+   - Ativar headers de segurança básicos.
+
+────────────────────────
+FASE 4 — SEGURANÇA (FRONTEND)
+────────────────────────
+1. Verifica se não há:
+   - Tokens guardados em localStorage de forma insegura (quando possível, usar cookies com HttpOnly do lado backend),
+   - Dados sensíveis em JavaScript exposto ao cliente,
+   - Strings de chaves / segredos no bundle.
+
+2. Prevenção XSS:
+   - Verificar uso de dangerouslySetInnerHTML (React) ou equivalentes,
+   - Sanitizar qualquer HTML vindo do servidor ou de utilizadores.
+
+3. Fluxos:
+   - Não mostrar páginas de empresa a utilizadores sem permissões,
+   - Esconder botões/ações que o utilizador não pode usar.
+
+────────────────────────
+FASE 5 — BUGS E ESTABILIDADE
+────────────────────────
+1. Analisa:
+   - Imports quebrados,
+   - Funções não usadas,
+   - Promessas sem .catch / try-catch,
+   - Estados que podem ficar undefined,
+   - Ciclos de renderização infinitos.
+
+2. Corrige:
+   - Erros de consola óbvios,
+   - Referências a variáveis que não existem,
+   - Rotas que não tratam erros.
+
+3. Garante:
+   - `npm run build` (ou equivalente) passa sem erros,
+   - `npm test` (se existir) passa sem falhas.
+
+────────────────────────
+FASE 6 — TESTES
+────────────────────────
+1. Após as correções:
+   - Corre o build,
+   - Corre os testes,
+   - Se possível, cria testes mínimos para as partes mais sensíveis (auth, pagamentos, ações de empresa).
+
+2. Se algo falhar:
+   - NÃO forces o build a “passar à força”,
+   - Corrige a causa raiz,
+   - Explica o que foi feito.
+
+────────────────────────
+FASE 7 — RELATÓRIO FINAL
+────────────────────────
+Quero um relatório final com:
+
+1. Lista de todas as vulnerabilidades encontradas:
+   - Tipo (fuga de dados, bug, risco de segurança),
+   - Localização (ficheiro + linha),
+   - Como foi corrigido.
+
+2. Lista de bugs corrigidos:
+   - Erros críticos,
+   - Erros médios,
+   - Erros menores.
+
+3. Lista de recomendações futuras:
+   - Boas práticas de segurança,
+   - Sugestões de logging,
+   - Sugestões de monitorização.
+
+4. Lista de variáveis de ambiente obrigatórias:
+   - NOME_DA_VAR,
+   - Exemplo de valor,
+   - Onde é usada.
+
+IMPORTANTE:
+- NÃO faças alterações destrutivas.
+- NÃO reestrutures o projeto todo.
+- FOCA em segurança, privacidade e correção de bugs.
+
+No fim, responde:
+"Auditoria de segurança e bugs concluída" + resumo das principais alterações.

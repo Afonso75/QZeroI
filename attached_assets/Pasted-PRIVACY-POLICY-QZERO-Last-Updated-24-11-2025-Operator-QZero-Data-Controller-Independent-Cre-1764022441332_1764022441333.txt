@@ -1,0 +1,112 @@
+PRIVACY POLICY — QZERO 
+Last Updated: 24/11/2025
+Operator: QZero
+Data Controller: Independent Creator / Administrator of the QZero Platform
+Contact Email: waitlesslabs@gmail.com
+Country: Portugal
+This Privacy Policy explains how the QZero application ("we", "the platform") collects, uses and protects personal data belonging to users (“you”), including customers and business users, in accordance with the European General Data Protection Regulation (GDPR).
+By using QZero, you agree to the practices described in this Privacy Policy.
+________________________________________
+1. Who We Are
+QZero is a digital queue, ticket, and booking management application created and operated by an independent developer.
+The platform enables:
+•	Customers to take digital tickets, make bookings, view wait times, receive notifications, see nearby businesses, and use manual/QR tickets.
+•	Businesses to manage queues, bookings, services, opening hours, digital tickets, manual tickets, tolerance times, customer arrivals, feedback, history, and subscription billing.
+________________________________________
+2. Data We Collect
+2.1. Customer Data
+•	Name
+•	Email
+•	Encrypted password
+•	Booking history
+•	Ticket history
+•	Feedback submitted to businesses
+•	Country / language preferences
+2.2. Business Data
+•	Business name
+•	Business email
+•	Country and location
+•	Service categories
+•	Logo and optional photos
+•	Opening hours and tolerance times
+•	Queue and booking history
+•	Customer feedback
+2.3. Technical Data
+•	IP address
+•	Device type, OS, and browser
+•	Cookies essential for login
+•	Session tokens and identifiers
+•	Crash analytics
+2.4. Payment Data (for Business Accounts)
+Handled exclusively by Stripe Payments.
+We do not store full card numbers at any time.
+________________________________________
+3. Purposes of Data Processing
+We process data for:
+3.1. Application Functionality
+•	Account creation
+•	Ticket and booking management
+•	Queue notifications
+•	Business discovery
+•	Customer feedback
+•	Panel TV display
+•	Manual ticket generation
+•	Subscription management
+3.2. Communication
+•	Booking confirmations
+•	Email notifications
+•	Technical support
+3.3. Analytics & Improvements
+•	Performance monitoring
+•	Error detection
+•	Usage statistics
+3.4. Legal Requirements
+•	Consent logging
+•	Payment records (via Stripe)
+•	GDPR compliance
+________________________________________
+4. Legal Basis
+We process data under:
+•	Consent (given before registration)
+•	Contractual necessity (use of the app)
+•	Legitimate interests (security, fraud prevention, app maintenance)
+•	Legal obligations (payment processing, accounting)
+________________________________________
+5. Data Sharing
+We do not sell personal data.
+Data may be shared only with:
+•	Stripe for subscription payments
+•	Hosting providers
+•	Email and notification service providers
+•	Security and analytics tools
+All third-party providers comply with GDPR where required.
+________________________________________
+6. Data Security
+We implement:
+•	Password encryption
+•	HTTPS on all communications
+•	Secure authentication tokens
+•	Access-restricted backend infrastructure
+•	Internal auditing
+________________________________________
+7. User Rights
+Users may, at any time:
+•	Request access to their data
+•	Request correction
+•	Request deletion (right to be forgotten)
+•	Request data export
+•	Withdraw consent
+•	File complaints with the Portuguese Data Protection Authority (CNPD)
+Requests should be made to: suporteqzero@gmail.com
+________________________________________
+8. Data Retention
+•	Account data → retained until account deletion
+•	Queue/booking history → retained while account is active
+•	Technical logs → up to 90 days
+•	Payment records → according to Stripe’s legal requirements
+________________________________________
+9. International Transfers
+If data is processed outside the EU, it is only through GDPR-compliant providers (such as Stripe or hosting providers with Standard Contractual Clauses).
+________________________________________
+10. Changes to this Policy
+The latest version will always be available before registration or account creation.

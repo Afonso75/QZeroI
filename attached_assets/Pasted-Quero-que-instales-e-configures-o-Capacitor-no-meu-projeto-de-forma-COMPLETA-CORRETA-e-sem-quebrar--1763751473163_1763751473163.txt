@@ -1,0 +1,99 @@
+Quero que instales e configures o Capacitor no meu projeto de forma COMPLETA, CORRETA e sem quebrar nada do que já existe. Segue as regras abaixo com 100% de rigor:
+
+────────────────────────────────────────
+REGRAS PRINCIPAIS (OBRIGATÓRIAS)
+────────────────────────────────────────
+1. NÃO podes alterar ou apagar ficheiros existentes sem primeiro explicar porquê.
+2. NÃO podes modificar a lógica do meu código, apenas integrar o Capacitor.
+3. NÃO podes alterar estrutura de pastas sem justificar.
+4. Todas as operações devem ser feitas de forma compatível com o meu stack.
+5. O projeto TEM de continuar a correr normalmente depois da integração.
+6. NÃO instalar dependências duplicadas nem versões erradas.
+
+────────────────────────────────────────
+OBJETIVOS
+────────────────────────────────────────
+Quero:
+- Instalar o Capacitor corretamente no meu projeto.
+- Configurar `capacitor.config.json`.
+- Instalar as plataformas necessárias (Android e iOS).
+- Criar a estrutura base para builds.
+- Garantir compatibilidade com AppFlow.
+- NÃO STRAGAR nada na aplicação existente.
+
+────────────────────────────────────────
+PASSO A PASSO QUE TENS DE SEGUIR
+────────────────────────────────────────
+
+FASE 1 — Verificar stack e requisitos
+1. Identifica o tipo de projeto (React, Vue, Svelte, Vanilla, etc.).
+2. Confirma:
+   - Existe index.html ou equivalente.
+   - Existe build output (ex.: dist, build).
+3. Se não existir, cria instruções para gerar o build.
+
+FASE 2 — Instalar Capacitor
+Executa estes comandos:
+- npm install @capacitor/core @capacitor/cli
+- npx cap init "QZero" "com.qzero.app"
+
+A app ID tem de ser: com.qzero.app  
+O nome da app tem de ser: QZero
+
+FASE 3 — Configurar capacitor.config.json
+1. Configura:
+   - appName
+   - appId
+   - webDir (detetar automaticamente a pasta onde o build é gerado, como "dist" ou "build")
+   - server options (se necessário)
+2. Garante que o webDir está correto.
+
+FASE 4 — Adicionar plataformas
+Executa:
+- npx cap add android
+- npx cap add ios
+
+Se a plataforma já existir, NÃO recriar — apenas sincronizar.
+
+FASE 5 — Build + Sync
+Executa:
+- npm run build (ou o comando correto do meu projeto)
+- npx cap sync
+
+Garantir que:
+- ficheiros Android/iOS são gerados
+- nada é apagado no projeto web
+- não há erros ou warnings críticos
+
+FASE 6 — Capacitor Plugins
+1. Instala plugins essenciais quando necessário:
+- @capacitor/app
+- @capacitor/haptics
+- @capacitor/keyboard
+- @capacitor/splash-screen
+
+2. NÃO instalar plugins extras sem aprovação.
+
+FASE 7 — Verificação final
+1. Confirmar que a versão web funciona.
+2. Confirmar que a versão Android/iOS foi criada.
+3. Confirmar que tudo está pronto para AppFlow.
+4. Criar instruções de como:
+   - Abrir Android Studio (`npx cap open android`)
+   - Abrir Xcode (mesmo sem Mac: explicar opções)
+   - Usar AppFlow para cloud builds.
+
+FASE 8 — Documentação obrigatória
+Entrega:
+- Lista dos comandos executados
+- O conteúdo final do capacitor.config.json
+- Notas de possíveis erros e correções
+- Explicação de como fazer build para:
+   - Android
+   - iOS
+   - AppFlow
+
+────────────────────────────────────────
+RESPONDE APENAS COM:
+"Capacitor instalado e configurado", seguido da documentação.
+────────────────────────────────────────

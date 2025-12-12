@@ -1,0 +1,346 @@
+{
+  "tickets": [
+    {
+      "id": "ticket_1764035685343",
+      "queue_id": "q1764035555903",
+      "business_id": "company_1764034192117",
+      "user_email": "afonsomarques742@gmail.com",
+      "user_phone": "+351918681465",
+      "ticket_number": 1,
+      "status": "cancelado",
+      "estimated_time": 10,
+      "position": 1,
+      "is_premium": false,
+      "created_date": "2025-11-25T01:54:45.343Z",
+      "called_at": "2025-11-25T01:57:31.827Z",
+      "completed_at": "2025-11-25T02:03:04.099Z"
+    }
+  ],
+  "queues": [
+    {
+      "id": "q1763831873677",
+      "name": "teste",
+      "description": "",
+      "average_service_time": 10,
+      "tolerance_time": 5,
+      "max_capacity": 100,
+      "current_number": 0,
+      "last_issued_number": 0,
+      "status": "aberta",
+      "is_active": true,
+      "working_hours": {
+        "saturday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "23:59",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763831773794",
+      "created_at": "2025-11-22T17:17:53.677Z"
+    },
+    {
+      "id": "q1763843367136",
+      "name": "Atendimento Prioritario ",
+      "description": "",
+      "average_service_time": 10,
+      "tolerance_time": 5,
+      "max_capacity": 100,
+      "current_number": 0,
+      "last_issued_number": 0,
+      "status": "aberta",
+      "is_active": true,
+      "working_hours": {
+        "saturday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "23:59",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763832537312",
+      "created_at": "2025-11-22T20:29:27.136Z"
+    },
+    {
+      "id": "q1763999754410",
+      "name": "teste",
+      "description": "tetste",
+      "average_service_time": 10,
+      "tolerance_time": 5,
+      "max_capacity": 100,
+      "current_number": 0,
+      "last_issued_number": 0,
+      "status": "aberta",
+      "is_active": true,
+      "working_hours": {
+        "monday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "23:59",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763925403987",
+      "created_at": "2025-11-24T15:55:54.410Z"
+    },
+    {
+      "id": "q1764035555903",
+      "name": "teste",
+      "description": "teste",
+      "average_service_time": 10,
+      "tolerance_time": 5,
+      "max_capacity": 100,
+      "current_number": 1,
+      "last_issued_number": 1,
+      "status": "aberta",
+      "is_active": true,
+      "working_hours": {
+        "monday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        },
+        "tuesday": {
+          "enabled": true,
+          "start": "00:01",
+          "end": "23:59",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1764034192117",
+      "created_at": "2025-11-25T01:52:35.903Z",
+      "last_reset_date": "2025-11-25"
+    }
+  ],
+  "businesses": [
+    {
+      "id": "company_1763777914320",
+      "name": "aaa",
+      "description": "aa",
+      "category": "beleza",
+      "address": "Rua de Santa Catarina 260, 4000-120 Porto",
+      "street_name": "Rua de Santa Catarina",
+      "door_number": "260",
+      "postal_code": "4000-120",
+      "city": "Porto",
+      "district": "Porto",
+      "country": "PT",
+      "phone": "+351918681465",
+      "email": "afonsomarques742+empresa@gmail.com",
+      "logo_url": "/uploads/logotipo_de_honra-1763777901995-697164312.jpeg",
+      "photo_url": "",
+      "media_gallery": [],
+      "custom_category": null,
+      "is_active": false,
+      "owner_email": "user1763777826358107",
+      "latitude": 41.1535311,
+      "longitude": -8.6047517,
+      "created_at": "2025-11-22T02:20:30.899Z"
+    },
+    {
+      "id": "company_1763780339683",
+      "name": "Teste",
+      "description": "teste",
+      "category": "outros",
+      "address": "Rua Da Escola 200, 2125-401 Granho",
+      "street_name": "Rua Da Escola",
+      "door_number": "200",
+      "postal_code": "2125-401",
+      "city": "Granho",
+      "district": "Santarém",
+      "country": "PT",
+      "phone": "918681465",
+      "email": "waitlesslabs@gmail.com",
+      "logo_url": "/uploads/4557cf78_9725_42a2_bf27_225e7e5aed59-1763780318941-873894002.jpeg",
+      "photo_url": "",
+      "media_gallery": [],
+      "custom_category": null,
+      "is_active": true,
+      "owner_email": "user1763779125177451",
+      "latitude": 39.086145,
+      "longitude": -8.6589931,
+      "created_at": "2025-11-22T03:13:39.052Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "service_1763831897429",
+      "name": "teste",
+      "description": "ss",
+      "duration": 30,
+      "price": 0,
+      "category": "s",
+      "tolerance_time": 5,
+      "working_hours": {
+        "saturday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763831773794",
+      "is_active": true
+    },
+    {
+      "id": "service_1763846807555",
+      "name": "teste",
+      "description": "",
+      "duration": 30,
+      "price": 11,
+      "category": "teste",
+      "tolerance_time": 5,
+      "working_hours": {
+        "friday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        },
+        "saturday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763832537312",
+      "is_active": true
+    },
+    {
+      "id": "service_1764000162819",
+      "name": "tesst",
+      "description": "teste",
+      "duration": 30,
+      "price": 50,
+      "category": "teste",
+      "tolerance_time": 5,
+      "working_hours": {
+        "monday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "19:00",
+          "break_start": "",
+          "break_end": ""
+        },
+        "wednesday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "12:00",
+          "break_end": "13:00"
+        },
+        "friday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1763925403987",
+      "is_active": true
+    },
+    {
+      "id": "service_1764035583081",
+      "name": "teste",
+      "description": "teste",
+      "duration": 30,
+      "price": 80,
+      "category": "tres",
+      "tolerance_time": 5,
+      "working_hours": {
+        "monday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        },
+        "wednesday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        },
+        "friday": {
+          "enabled": true,
+          "start": "09:00",
+          "end": "18:00",
+          "break_start": "",
+          "break_end": ""
+        }
+      },
+      "business_id": "company_1764034192117",
+      "is_active": true
+    }
+  ],
+  "appointments": [
+    {
+      "id": "appointment_1764028677557",
+      "business_id": "company_1763925403987",
+      "service_id": "service_1764000162819",
+      "user_email": "afonsomarques742@gmail.com",
+      "appointment_date": "2025-11-19",
+      "appointment_time": "16:30",
+      "status": "agendado",
+      "notes": "aaa",
+      "is_manual": true,
+      "manual_name": "Afonso Monteiro Marques",
+      "duration": 30,
+      "buffer_time": 0
+    },
+    {
+      "id": "appointment_1764035729022",
+      "business_id": "company_1764034192117",
+      "service_id": "service_1764035583081",
+      "user_email": "afonsomarques742@gmail.com",
+      "appointment_date": "2025-11-28",
+      "appointment_time": "13:30",
+      "status": "em_atendimento",
+      "notes": "",
+      "duration": 30,
+      "buffer_time": 0,
+      "management_token": "lqmvkbnfdorizenmwjnpd"
+    },
+    {
+      "id": "appointment_1764036575658",
+      "business_id": "company_1764034192117",
+      "service_id": "service_1764035583081",
+      "user_email": "afonsomarques742@gmail.com",
+      "appointment_date": "2026-12-09",
+      "appointment_time": "13:30",
+      "status": "falta",
+      "notes": "Cliente: Afonso Monteiro Marques",
+      "is_manual": true,
+      "manual_name": "Afonso Monteiro Marques",
+      "duration": 30,
+      "buffer_time": 0
+    },
+    {
+      "id": "appointment_1764036920952",
+      "business_id": "company_1764034192117",
+      "service_id": "service_1764035583081",
+      "user_email": "afonsomarques742@gmail.com",
+      "appointment_date": "2025-12-24",
+      "appointment_time": "12:30",
+      "status": "falta",
+      "notes": "",
+      "duration": 30,
+      "buffer_time": 0,
+      "management_token": "zg3xp7yy19ig715elubxqj"
+    }
+  ],
+  "reviews": [],
+  "supportMessages": []
+}

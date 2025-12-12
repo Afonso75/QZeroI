@@ -1,0 +1,101 @@
+Quero que cries um MENU INFERIOR (bottom navigation bar) idêntico ao estilo do Instagram, mas adaptado para o meu projecto.
+Segue EXACTAMENTE todas estas regras obrigatórias:
+
+REQUISITOS ESTRITOS (NÃO PODES IGNORAR OU ALTERAR)
+1. A posição do menu
+
+O menu deve aparecer fixo no fundo da tela em dispositivos móveis.
+
+Deve sempre manter-se visível, mesmo quando o utilizador faz scroll.
+
+2. O formato
+
+O menu deve ser uma bottom nav bar simples, minimalista e moderna.
+
+Sem sombra exagerada, apenas um leve efeito (opacidade ou leve border superior).
+
+O fundo deve ser igual ao fundo padrão da app (ou branco/escuro conforme tema).
+
+3. ITENS DO MENU (APENAS ÍCONES, ZERO TEXTO)
+
+EXIGÊNCIA: os botões NÃO PODEM conter texto. Apenas ícones.
+
+Os ícones devem ter este estilo:
+
+Tamanho entre 22px e 28px.
+
+Ícones outline (estilo Instagram / Ionicons outline).
+
+Ícone activo fica cheio ou com outra cor (ex.: cor primária da app).
+
+Ícone inactivo fica cinza/outline.
+
+Itens obrigatórios (substituir pelos ícones equivalentes do teu framework):
+
+Home (ícone: home-outline / home)
+
+Pesquisar / Explorar (ícone: search-outline / search)
+
+Criar / Adicionar (ícone: add-circle-outline / add-circle)
+
+Notificações (ícone: notifications-outline / notifications)
+
+Perfil (ícone: person-outline / person)
+
+4. Estrutura técnica
+
+O menu deve ser um componente separado (ex.: BottomNav, MobileNav, etc.).
+
+Deve importar apenas os ícones necessários.
+
+O estado da rota activa deve ser detectado para mudar o ícone activo.
+
+5. Regras de compatibilidade
+
+O código deve funcionar em:
+
+Dispositivos móveis iOS e Android
+
+Qualquer ambiente mobile web (PWA, Capacitor, Ionic, React, Vue ou o que for detectado no meu projecto)
+
+O design deve ser responsivo e centrado correctamente.
+
+6. NÃO podes alterar o resto da aplicação
+
+Não podes modificar layout geral, páginas, lógica ou componentes que NÃO sejam o menu.
+
+Não podes substituir estilos globais.
+
+SOMENTE criar o menu e integrá-lo de forma não destrutiva.
+
+7. Integração
+
+O componente do menu deve ser importado e mostrado apenas em páginas principais.
+
+Não deve aparecer em páginas como login, register, onboarding ou settings (se existirem).
+
+Deve seguir as boas práticas do framework.
+
+O que quero como saída
+
+Quero que me entregues:
+
+O código completo do componente do menu inferior.
+
+A folha de estilos (CSS/SCSS) correspondente.
+
+A instrução exacta de onde colar ou substituir no meu projecto.
+
+Como activar o estado activo do ícone consoante a rota.
+
+A versão final pronta a copiar e colar.
+
+Reforço final (muito importante)
+
+NÃO uses texto no menu.
+
+NÃO mudes estruturas que não sejam o menu.
+
+NÃO alteres layouts existentes.
+
+O menu tem que ficar EXACTAMENTE como o do Instagram, mas adaptado ao meu estilo.

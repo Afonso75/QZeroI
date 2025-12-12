@@ -1,0 +1,82 @@
+TERMS & CONDITIONS — QZERO (FINAL — ENGLISH VERSION)
+Last Updated: 24/11/2025
+These Terms govern the use of the QZero application (“the Service”), created and operated by an independent developer (“the Operator”).
+By creating an account, you agree to these Terms.
+________________________________________
+1. Overview of the Service
+1.1. For Customers
+Customers can:
+•	View available businesses
+•	Take digital tickets
+•	Make bookings
+•	Receive status notifications
+•	View the TV Panel
+•	Use manual/QR tickets
+•	View ticket/booking history
+•	Leave feedback
+•	Search businesses by name
+1.2. For Businesses
+Businesses can:
+•	Create a business profile
+•	Configure services, opening hours, and tolerance times
+•	Manage digital tickets
+•	Create manual tickets
+•	Manage bookings
+•	Track customer arrivals
+•	View customer feedback
+•	Access statistics and history
+•	Display a TV Panel
+•	Use a monthly subscription (Stripe)
+•	Enjoy a 2-day free trial before billing
+________________________________________
+2. Subscription Terms (Businesses Only)
+•	Price: €49.99 / month
+•	Payments are processed through Stripe
+•	First 2 days are free
+•	Subscription renews automatically unless cancelled
+•	No refunds for periods already started
+•	Cancellation may be done at any time inside the application
+________________________________________
+3. User Responsibilities
+3.1. Customers
+You agree to:
+•	Provide accurate account information
+•	Respect booking times and tolerance periods
+•	Not abuse the digital queue system
+•	Not create false accounts
+3.2. Businesses
+You agree to:
+•	Use the queue system honestly
+•	Manage customer arrival confirmations
+•	Provide accurate information about services
+•	Respect customer privacy
+•	Not manipulate queues or data
+________________________________________
+4. Prohibited Activities
+Users may NOT:
+•	Attempt to manipulate the queue
+•	Use bots or fraudulent tools
+•	Access accounts of other users
+•	Interfere with the Service
+•	Submit false information
+________________________________________
+5. Limitation of Liability
+The Operator is not responsible for:
+•	Internet connection issues
+•	Device failures
+•	Mistakes made by businesses in scheduling or queue management
+•	Late arrivals or customer no-shows
+•	Business-specific rules (prices, service details, tolerance times)
+•	Any data entered by businesses or customers themselves
+The Service is provided “as is” without warranties of uninterrupted availability.
+________________________________________
+6. Intellectual Property
+All content, code, design, brand name “QZero”, and system architecture belong to the Operator.
+________________________________________
+7. Account Termination
+We may suspend or terminate accounts that violate these Terms.
+Users may delete their accounts at any time.
+________________________________________
+8. Governing Law
+These Terms are governed by the laws of Portugal.
+Any disputes will be handled by Portuguese courts.

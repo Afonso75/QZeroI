@@ -1,0 +1,238 @@
+Objetivo:
+Implementar o fluxo de Conta Empresarial para a aplicação QZero (QZero / FilaZero). Requisitos principais:
+
+Quando o utilizador escolher “Criar conta” e selecionar “Conta Empresa”, obrigatoriamente tem de:
+
+Preencher o Perfil da Empresa (formulário obrigatório com validações).
+
+Após submeter o perfil, ser direcionado para o pagamento por Stripe (49,99€/mês).
+
+Até confirmação do pagamento a conta não tem acesso às funcionalidades empresariais (painel, filas avançadas, dashboards, integração QR, etc.).
+
+Após confirmação de pagamento (webhook Stripe), a conta empresarial é ativada e recebe todas as funcionalidades.
+
+Se o utilizador criou perfil mas não pagou, sempre que aceder ao painel verá um banner persistente / modal com CTA para pagar o plano. O acesso às funcionalidades empresariais permanece bloqueado até o pagamento.
+
+Permitir um mecanismo controlado pelo admin para acesso gratuito temporário (ex.: para corrigir erros), com logs e expiração automática.
+
+Detalhes técnicos e UI (passo a passo):
+
+A. Formulário do Perfil da Empresa
+
+Nome do campo (validação obrigatória):
+
+companyName (string, obrigatório)
+
+companyVAT (string, opcional / validar formato por país)
+
+companyCountry (string, obrigatório)
+
+companyAddress (string, obrigatório)
+
+companyCity (string, obrigatório)
+
+companyPostalCode (string, obrigatório)
+
+companyPhone (string, opcional)
+
+companyEmail (string, obrigatório, validar email)
+
+companyCategory (string, obrigatório — ex: Clínica, Restaurante, Repartição, Barbearia…)
+
+companyCoordinates (lat,lng) — opcional; se não existir, pedir geocoding automático a partir da morada.
+
+adminUserId (referência ao utilizador que criou a conta)
+
+trialModeRequested (boolean, default false) — usado apenas para pedidos de acesso gratuito controlado.
+
+UI: formulário com validação em tempo real; botão “Submeter perfil e prosseguir para pagamento”.
+
+B. Fluxo após submeter o perfil
+
+Ao submeter o perfil:
+
+Gravar companyProfile no banco de dados com status: "pending_payment".
+
+Criar um registo companyOwner vinculado ao userId.
+
+Mostrar uma página/overlay de resumo do perfil com botão “Pagar Plano Empresarial — 49,99€/mês (Stripe)”.
+
+Exibir texto claro: “Após pagamento a sua conta empresarial será ativada com todas as funcionalidades. Até lá, verá um banner lembrando o pagamento.”
+
+Se o utilizador cancelar nesta fase, o perfil fica guardado (status: "pending_payment") e sempre que fizer login verá o banner modal de pagamento.
+
+C. Integração Stripe (pagamento recorrente mensal)
+
+Método recomendado: Stripe Subscription + Checkout Session (ou Stripe Elements se quiser checkout embebido).
+
+Passos específicos para a Base44 gerar:
+
+Criar product/price no Stripe: product: "QZero - Plano Empresarial", price: 49.99 EUR / month. (Se for modo teste, usar chave de teste).
+
+Quando o utilizador clicar em pagar, chamar endpoint server-side que cria um Checkout Session:
+
+Parâmetros: customer_email = companyEmail (ou user email), line_items = [{ price: "<price_id>", quantity: 1 }], mode: "subscription", success_url: "<app_url>/company-setup?session_id={CHECKOUT_SESSION_ID}", cancel_url: "<app_url>/company-profile"
+
+Guardar localmente checkoutSessionId associado ao companyProfile.
+
+Redirecionar utilizador para a Stripe Checkout.
+
+No servidor, configurar webhook Stripe (por exemplo checkout.session.completed e invoice.payment_succeeded) para:
+
+Verificar o session_id e a customer_email.
+
+Atualizar companyProfile.status para "active" e gravar subscriptionId, stripeCustomerId, subscriptionStatus.
+
+Enviar email de boas-vindas com informações de ativação e instruções.
+
+Caso invoice.payment_failed ou customer.subscription.deleted:
+
+Atualizar companyProfile.status para "payment_failed" ou "cancelled".
+
+Bloquear as funcionalidades empresariais (mudar featuresEnabled=false).
+
+Enviar notificações ao admin/empresa com instruções para atualizar método de pagamento.
+
+D. Gating / Controlo de funcionalidades empresariais
+
+Todas as funcionalidades empresariais devem verificar duas condições antes de permitir acesso:
+
+O utilizador está autenticado e é companyAdmin para aquela empresa.
+
+A companyProfile.status === "active" e subscriptionStatus === "active".
+
+Caso contrário, apresenta um modal explicando que é preciso pagar 49,99€/mês e exibe CTA para pagar.
+
+Componentes/variáveis a criar:
+
+companyProfile (objeto)
+
+subscriptionStatus (active, past_due, cancelled, trial, pending_payment)
+
+featuresEnabled (boolean) — avaliado como subscriptionStatus === 'active'.
+
+E. Banner / Modal persistente até pagamento
+
+Se companyProfile.status !== "active":
+
+Exibir badge/banner superior com texto: “A sua conta empresarial está pendente de pagamento. Ative o plano (49,99€/mês) para desbloquear todas as funcionalidades.”
+
+O banner deve conter botão “Pagar Plano Empresarial” que reabre o checkout.
+
+Em todas as rotas do painel empresarial, caso featuresEnabled===false, esconder as ações protegidas e mostrar um CTA contextualizado.
+
+F. Acesso gratuito/temporário para correções (modo de testes/admin)
+
+Requisitos:
+
+Deve ser controlado apenas por utilizadores com permissão de admin (tu ou equipa).
+
+Deve registar logs de ativação e expiração para auditoria.
+
+Deve expirar automaticamente após X dias (ex.: 7 dias) ou em data específica.
+
+Implementação sugerida:
+
+Criar endpoint admin: POST /admin/companies/:companyId/grant-temp-access com payload { days: 7, reason: "fix bugs" }.
+
+Esse endpoint define companyProfile.temporaryAccess = { enabled: true, expiresAt: <ISO>, grantedBy: <adminId>, reason } e featuresEnabled = true.
+
+No middleware que verifica featuresEnabled, considerar true se temporaryAccess.enabled === true && now <= expiresAt.
+
+Registar evento em accessLogs com quem ativou e quando.
+
+Adicionar UI no painel admin para revogar manualmente.
+
+Alternativa (sem endpoint): gerar um promo code interno que ativa trial de X dias ao usar um botão “Ativar Acesso de Teste (Admin Only)”.
+
+G. Edge cases e mensagens ao utilizador
+
+Pagamento bem-sucedido:
+
+Mensagem: “Pagamento confirmado — Parabéns! A sua conta empresarial está ativa. Aceda ao painel completo.”
+
+Pagamento pendente/falhado:
+
+Mensagem: “O seu pagamento não foi autorizado. Atualize o método de pagamento para reativar a conta.”
+
+Opção de reabrir Checkout ou ligar para suporte.
+
+Cancelamento voluntário:
+
+Ao cancelar a subscrição, subscriptionStatus = cancel_at_period_end ou cancelled conforme Stripe; exibir data final de acesso.
+
+Perfil criado mas sem pagamento:
+
+Mensagem: “Perfil criado com sucesso. Complete o pagamento para ativar a conta empresarial.”
+
+Mostrar o banner persistente e impedir acesso às funcionalidades.
+
+H. Segurança e boas práticas
+
+Nunca confiar apenas em dados do cliente (front-end). Todas as decisões de desbloqueio de funcionalidades devem verificar o estado guardado no servidor/BD.
+
+Validar webhooks Stripe com signature e secret key.
+
+Armazenar stripeCustomerId e subscriptionId com segurança.
+
+Enviar emails transacionais com link para gestão da subscrição (billing portal) para atualizar método de pagamento.
+
+I. Testes e verificação na Base44
+
+Incluir ambiente test e production para Stripe (chave de teste vs. chave real).
+
+Testes a executar:
+
+Criar perfil -> redirecionar para Checkout -> simular pagamento de teste -> verificar que companyProfile.status fica active.
+
+Criar perfil -> cancelar -> verificar banner persistente.
+
+Simular invoice.payment_failed -> verificar bloqueio.
+
+Testar grant-temp-access via admin -> confirmar acesso temporário e expiração automática.
+
+Logs: guardar todos os eventos de pagamento, ativação, revogação.
+
+J. UX recomendada (textos prontos)
+
+Banner quando não pago: “Plano Empresarial pendente — Ative por 49,99€/mês para desbloquear Painel, Gestão de Filas, Reporting e integrações.” (botão: “Pagar plano — 49,99€/mês”)
+
+Tela após pagamento: “Obrigado! A sua conta empresarial está ativa.” + botão “Ir para Painel”.
+
+Modal de confirmação de cancelamento: “Ao cancelar, perderá funcionalidades no final do período faturado. Confirmar cancelamento?”
+
+K. Dados e modelos (exemplo JSON)
+
+companyProfile:
+
+{
+  "id": "company_123",
+  "companyName": "Exemplo Lda",
+  "companyEmail": "admin@exemplo.com",
+  "companyCountry": "Portugal",
+  "companyAddress": "...",
+  "companyCoordinates": { "lat": 38.7223, "lng": -9.1393 },
+  "adminUserId": "user_456",
+  "status": "pending_payment",
+  "subscriptionId": null,
+  "stripeCustomerId": null,
+  "temporaryAccess": { "enabled": false, "expiresAt": null, "grantedBy": null },
+  "createdAt": "2025-11-16T12:00:00Z"
+}
+
+
+L. Prioridade de implementação (passos que a Base44 deve gerar imediatamente)
+
+Formulário de criação de companyProfile + validações.
+
+Endpoint para criar Checkout Session Stripe e redirecionamento.
+
+Webhook listener para checkout.session.completed e invoice.payment_succeeded.
+
+Middleware de verificação featuresEnabled (server-side).
+
+Banner/modal persistente para pending_payment.
+
+Endpoint admin para grant-temp-access.
+
+Testes de ponta a ponta em ambiente de teste Stripe.

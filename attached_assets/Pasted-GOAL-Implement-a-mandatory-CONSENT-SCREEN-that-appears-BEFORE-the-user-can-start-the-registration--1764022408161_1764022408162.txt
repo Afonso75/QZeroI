@@ -1,0 +1,164 @@
+GOAL:
+Implement a mandatory CONSENT SCREEN that appears BEFORE the user can start the registration process. This applies to both customer accounts and business accounts. The user MUST accept the Privacy Policy and Terms & Conditions before the registration form becomes accessible.
+
+IMPORTANT RULES:
+- DO NOT modify or remove any existing logic in the registration process.
+- DO NOT break any current routes, components, or backend logic.
+- Only ADD the consent system BEFORE the registration screen.
+- All code must be in ENGLISH (UI and comments).
+- Commit everything in a new branch: feature/pre-register-consent
+- Keep all existing functionalities intact.
+
+----------------------------------------------------------------------
+FRONTEND REQUIREMENTS
+----------------------------------------------------------------------
+
+1. Create a new component:
+   src/components/PreRegisterConsent.jsx
+
+2. This component MUST:
+   - Be shown BEFORE the registration form is displayed.
+   - Block access to the registration form until consent is accepted.
+   - Cover the screen as a full modal or full-page overlay.
+   - Disable scroll and interaction with anything behind it.
+
+3. UI Requirements:
+   - Title: “Privacy Policy & Terms Agreement”
+   - Description text (ENGLISH):
+     "Before creating your account, you must read and accept our Privacy Policy and Terms & Conditions. These documents explain how QZero handles your data and how the platform works."
+
+   - Two links:
+     • Privacy Policy → /politica-privacidade.html
+     • Terms & Conditions → /termos-condicoes.html
+     (Open in new tab)
+
+   - Checkbox (required):
+     “I have read and accept the Privacy Policy and Terms & Conditions.”
+
+   - Button:
+     “Accept and Continue”
+     (Disabled until checkbox is checked)
+
+4. Logic:
+   - When user clicks “Accept and Continue”:
+       • Save localStorage key: qzero_consent = "true"
+       • Generate guestId if missing: qzero_guest = crypto.randomUUID()
+       • Attempt POST to /api/consent (see backend section)
+       • If POST fails:
+            - Save retry payload in localStorage key: qzero_consent_pending
+            - Registration should STILL be allowed
+       • Close modal and allow access to the registration form.
+
+5. Consent version system:
+   - Create config file: src/config/consent.js
+   - Export: export const CONSENT_VERSION = "privacy_v1.0";
+
+   - If version changes in the future, modal must appear again.
+
+6. Insert this modal BEFORE the registration UI:
+   - Wherever the registration screen is loaded (e.g. /register page or Register.jsx), wrap it with:
+       <PreRegisterConsent>
+           {existing registration form}
+       </PreRegisterConsent>
+
+   - PREVENT rendering the registration form until consentAccepted === true.
+
+7. Retry system:
+   - On app load, check localStorage for qzero_consent_pending.
+   - If exists, attempt POST again.
+   - If successful, delete pending.
+
+----------------------------------------------------------------------
+BACKEND REQUIREMENTS
+----------------------------------------------------------------------
+
+1. Create backend route:
+   POST /api/consent
+
+2. File example:
+   backend/routes/consent.js
+   OR follow existing project structure.
+
+3. Request body must accept:
+   {
+     "guestId": "<uuid>",
+     "userId": null or string,
+     "consent": true,
+     "version": "privacy_v1.0",
+     "userAgent": "...",
+     "locale": "...",
+     "source": "pre-register"
+   }
+
+4. Server must also capture:
+   - ip address (x-forwarded-for OR socket)
+   - timestamp = new Date().toISOString()
+
+5. Store in database:
+   collection/table: consents
+   fields:
+   {
+     guestId,
+     userId,
+     consent,
+     version,
+     userAgent,
+     locale,
+     ip,
+     source,
+     timestamp
+   }
+
+6. Response:
+   { "ok": true }
+
+7. Error handling:
+   - Never expose stack trace to client
+   - Return: { "ok": false }
+
+----------------------------------------------------------------------
+SECURITY REQUIREMENTS
+----------------------------------------------------------------------
+
+- Validate body fields
+- Rate limit consent endpoint (simple middleware)
+- All communication via HTTPS
+- DO NOT store passwords or sensitive user data in the consent log
+
+----------------------------------------------------------------------
+QA REQUIREMENTS
+----------------------------------------------------------------------
+
+Create manual QA steps:
+
+1. Open /register → modal MUST appear immediately.
+2. Checkbox unchecked → button disabled.
+3. Accept → localStorage updated + POST sent.
+4. Registration screen becomes available.
+5. If POST fails:
+   - localStorage.qzero_consent_pending created
+   - User STILL continues registration.
+6. On next app load:
+   - Pending consent is attempted again.
+7. Consent logged in DB.
+
+----------------------------------------------------------------------
+TEXT FOR UI (USE EXACTLY):
+
+Title: "Privacy Policy & Terms Agreement"
+
+Description:
+"Before creating your account, you must read and accept our Privacy Policy and Terms & Conditions. These documents explain how QZero handles your data and how the platform works."
+
+Checkbox:
+"I have read and accept the Privacy Policy and Terms & Conditions."
+
+Button:
+"Accept and Continue"
+
+----------------------------------------------------------------------
+FINAL STEP:
+After completing all tasks, respond with:
+
+"Pre-registration consent implemented. Here is the branch name and all updated files."
+

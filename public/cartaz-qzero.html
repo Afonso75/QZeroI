@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartaz QZero - Evite Filas de Espera</title>
+  <style>
+    @page { 
+      size: A4 portrait; 
+      margin: 0; 
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      width: 21cm;
+      height: 29.7cm;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .cartaz {
+      width: 100%;
+      height: 100%;
+      padding: 2cm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .logo-section {
+      margin-bottom: 1.5em;
+    }
+
+    .logo {
+      font-size: 72px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+    }
+
+    .tagline {
+      font-size: 28px;
+      color: #333;
+      font-weight: 600;
+      margin-top: 0.5em;
+      margin-bottom: 0.3em;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      font-weight: 400;
+    }
+
+    .content {
+      flex: 1;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 1.5em;
+      text-align: center;
+      color: #667eea;
+    }
+
+    .benefits {
+      margin-bottom: 2em;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #f8f9ff;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+    }
+
+    .benefit-icon {
+      font-size: 32px;
+      margin-right: 1em;
+      flex-shrink: 0;
+    }
+
+    .benefit-text h3 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.3em;
+    }
+
+    .benefit-text p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .how-to {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2em;
+      border-radius: 16px;
+      margin-bottom: 2em;
+    }
+
+    .how-to h2 {
+      color: white;
+      font-size: 28px;
+      margin-bottom: 1em;
+    }
+
+    .steps {
+      display: grid;
+      gap: 1em;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1em;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .step-number {
+      font-size: 32px;
+      font-weight: 900;
+      background: white;
+      color: #667eea;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1em;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2em;
+    }
+
+    .qr-placeholder {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1em;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      padding: 1em;
+    }
+
+    .url {
+      font-size: 22px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 0.5em;
+    }
+
+    .footer-note {
+      font-size: 14px;
+      color: #999;
+      font-style: italic;
+    }
+
+    @media print {
+      body {
+        width: 21cm;
+        height: 29.7cm;
+      }
+      
+      .cartaz {
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cartaz">
+    <div class="header">
+      <div class="logo-section">
+        <div class="logo">QZero</div>
+        <div class="tagline">Zero Filas de Espera</div>
+        <div class="subtitle">Gestão inteligente de senhas e marcações</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="benefits">
+        <div class="benefit-item">
+          <div class="benefit-icon">📱</div>
+          <div class="benefit-text">
+            <h3>Tire Senha pelo Telemóvel</h3>
+            <p>Não precisa de estar aqui presente. Tire a sua senha online e acompanhe em tempo real!</p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">⏰</div>
+          <div class="benefit-text">
+            <h3>Marque o Seu Atendimento</h3>
+            <p>Escolha o melhor dia e hora para si. Sem esperas, sem surpresas!</p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">🔔</div>
+          <div class="benefit-text">
+            <h3>Receba Notificações</h3>
+            <p>Avisamos quando estiver quase na sua vez. Aproveite o tempo como quiser!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-to">
+        <h2>Como Usar?</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">Aceda ao nosso QR Code ou website</div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">Escolha "Tirar Senha" ou "Marcar Atendimento"</div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">Acompanhe tudo em tempo real no telemóvel</div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-text">Chegue apenas quando for chamado!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="qr-placeholder">
+        QR CODE<br>
+        (escanear com<br>telemóvel)
+      </div>
+      <div class="url">www.qzero.app</div>
+      <div class="footer-note">
+        Sistema de gestão de filas inteligente • Powered by QZero
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+Modifica a aplicação QZero para permitir que **apenas empresas** possam adicionar logótipos ou fotos através de ficheiro local, durante a criação ou edição do perfil da empresa. Não utilizar URLs externas. Segue estas instruções rigorosamente:
+
+1. **Funcionalidade obrigatória:**
+   - Empresas podem subir um logótipo ou foto do seu estabelecimento quando criam ou editam o perfil.
+   - Utilizadores individuais **não têm acesso a esta funcionalidade**.
+   - O ficheiro deve ser carregado localmente (upload) e armazenado de forma segura no servidor ou armazenamento cloud da app.
+
+2. **Requisitos técnicos:**
+   - Interface com **botão “Escolher ficheiro”** e pré-visualização da imagem antes de submeter.
+   - Apenas ficheiros de imagem: PNG, JPG, JPEG, GIF.
+   - Limite de tamanho: 5MB.
+   - Mostrar mensagem de erro se o ficheiro for inválido ou exceder o limite.
+   - Guardar ficheiro no diretório seguro do servidor ou cloud storage; atualizar o perfil da empresa com o caminho da imagem.
+   - Permitir substituir a imagem existente.
+
+3. **Interface e UX:**
+   - Pré-visualização da imagem carregada antes de submeter.
+   - Botão “Remover imagem” para apagar logótipo ou foto existente.
+   - O campo do logótipo é obrigatório para empresas; o campo de foto adicional é opcional.
+
+4. **Segurança:**
+   - Validar tipo de ficheiro no frontend e backend.
+   - Escapar nomes de ficheiro para evitar conflitos ou ataques.
+   - Proteger o diretório de upload contra acessos não autorizados.
+
+5. **Integração backend:**
+   - Ao criar/editar perfil da empresa, se houver upload de logótipo/foto:
+       - Guardar o ficheiro localmente ou no cloud storage.
+       - Atualizar a base de dados da empresa com o caminho da imagem.
+   - Usar endpoints seguros para upload, aceitando `multipart/form-data`.
+
+6. **Feedback para o utilizador:**
+   - Mostrar mensagem de sucesso após upload.
+   - Mostrar pré-visualização imediatamente após escolher ficheiro.
+   - Mostrar erro se ficheiro inválido ou demasiado grande.
+
+7. **Extras recomendados:**
+   - Redimensionar automaticamente logótipos para tamanho padrão (ex.: 300x300 px).
+   - Gerar thumbnails para exibição em listas de empresas.
+   - Garantir que a UI é limpa e responsiva.
+
+⚠️ **Instrução final para a Replit IA:**  
+Cria todos os componentes frontend e backend necessários **apenas para empresas**, com upload de ficheiro seguro, validação, pré-visualização, substituição e remoção.  
+O código deve ser **completo, funcional, sem placeholders quebrados** e pronto para teste imediato.

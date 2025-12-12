@@ -1,0 +1,103 @@
+AVISO: Este é um pedido extremamente rígido. Corrige bugs e melhora o projecto, MAS não podes quebrar nem alterar funcionalidades existentes sem aprovação. Lê tudo com atenção e segue as regras abaixo passo a passo.
+
+Objetivo:
+- Fazer uma auditoria completa linha-a-linha do projecto.
+- Corrigir TODOS os erros (sintaxe, runtime, import, dependências, lógicas óbvias).
+- Validar builds, testes e qualidade de código.
+- Entregar alterações seguras, documentadas e revertíveis.
+
+Regras OBRIGATÓRIAS (não negociar):
+1. NÃO apagar ficheiros nem remover funcionalidades existentes.  
+2. NÃO alterar a lógica de negócio sem primeiro listar a proposta e obter aprovação.  
+3. NÃO substituir frameworks ou bibliotecas principais sem justificativa técnica detalhada e minha aprovação.  
+4. Todas as alterações têm de ser feitas numa branch nova chamada:
+   `bugfix/replit-ai-<YYYYMMDD-HHMMSS>` (usa timestamp actual).  
+5. Faz commits pequenos, com mensagens claras. No fim cria um Pull Request/merge request com todo o diff.  
+6. Fornece comando(s) para reverter (ex.: `git checkout main && git merge --abort` ou instruções de rollback) e cria um backup da branch `main` (ex.: `main-backup-<timestamp>`).
+
+Passos detalhados que tens de seguir (ordem obrigatória):
+
+FASE 0 — DETECÇÃO AUTOMÁTICA
+A. Detecta automaticamente o stack/framework usado (React, Next, Vue, Svelte, Node, Express, Capacitor, Ionic, etc.) e escreve um parágrafo curto "Stack detectado: <stack>" antes de qualquer alteração.
+B. Lista todos os ficheiros principais (package.json, capacitor.config.json, server files, api routes, cfgs, .env.example).
+
+FASE 1 — ANALISE ESTÁTICA E LINHA-A-LINHA (obrigatório)
+1. Executa análise estática: linter (ESLint ou equivalente), TypeScript check (`tsc --noEmit`) se aplicável, e formatação (Prettier) apenas para warnings de estilo — aplica Prettier só se aprovado por ti dentro do PR. Reporta todos os avisos e erros.
+2. Faz scanning linha-a-linha por:
+   - Imports inválidos
+   - Variáveis não definidas
+   - Promessas sem await/catch
+   - Usos incorretos de hooks (React)
+   - Referências a `VITE_BASE44_APP_ID` ou outras variáveis Base44 — lista-as e substitui por `process.env` ou indicar como configurar env vars.
+3. Gera um relatório inicial com:
+   - Lista de erros encontrados (por ficheiro e linha)
+   - Severidade (crítico / médio / menor)
+   - Ação proposta para cada erro (fix automática / pedir aprovação / ignorar)
+
+FASE 2 — CORREÇÕES AUTOMÁTICAS SEGUINDO REGRAS
+1. Para cada erro classificado como CRÍTICO: corrige imediatamente na branch `bugfix/...` (commit por erro ou grupo lógico).
+2. Para erros MÉDIO/MENOR: corrige automaticamente se a correção for local, contida e não altera lógica; caso contrário cria um comentário no PR com a sugestão e NÃO aplica.
+3. Para todos os ficheiros alterados, adiciona comentários inline no código explicando a alteração e a razão.
+4. Não introduzir novas dependências sem justificar. Se for absolutamente necessário, lista a dependência, motivo, e espera aprovação antes de instalar.
+
+FASE 3 — TESTES & BUILD (obrigatório)
+1. Executa:
+   - `npm ci` (ou `yarn install`)
+   - `npm run lint` (se existir)
+   - `npm run test` (unit tests)
+   - `npm run build` (web build)
+2. Corrige quaisquer erros que surjam durante estes passos.
+3. Se existirem testes ausentes para áreas críticas corrigidas, cria testes unitários básicos cobrindo as mudanças (usando Jest/Testing Library ou framework do projecto). Adiciona testes apenas para cobrir as correções aplicadas.
+4. Gera um relatório de resultado: lint OK/fails, test pass/fails, build OK/fails. Inclui logs relevantes.
+
+FASE 4 — VERIFICAÇÃO RÍGIDA (smoke tests manuais automatizados)
+1. Simula fluxo principal da app localmente (ex.: criar conta, login, criar perfil empresa, tirar senha, ver painel TV) — faz scripts ou instruções para testar cada fluxo.
+2. Documenta passo-a-passo como testar manualmente (browser e mobile emulador).
+3. Se houver integração com Stripe/Appflow/Base44, valida que o código não expõe chaves e que as variáveis de ambiente necessárias estão documentadas.
+
+FASE 5 — QUALIDADE, DOCUMENTAÇÃO E ENTREGÁVEIS
+1. Cria um PR com:
+   - Descrição detalhada das alterações.
+   - Lista dos ficheiros alterados.
+   - Lista de bugs corrigidos com referência a ficheiros/linhas originais.
+   - Comandos para testar localmente (ex.: `npm ci && npm run build && npm start`).
+   - Comandos para reverter/rollback.
+2. Anexa um changelog resumido e um log de commits.
+3. Fornece uma checklist com tudo que fizeste (lint, tests, build, manual smoke tests).
+4. Se alguma correção é potencialmente arriscada (muda comportamento), marca explicitamente no PR com WARNING e descreve como validar.
+
+REGRAS DE SEGURANÇA E PRIVACIDADE
+- NÃO colocar chaves privadas ou segredos no código. Se detectar segredos em código (ex.: chaves, tokens, VITE_...), reporta e remove substituindo por referências a env vars e documenta como definir.
+- Se removeres dados sensíveis, cria um commit separado com explicação.
+
+ENTREGÁVEIS OBRIGATÓRIOS (após conclusão)
+- URL do PR / branch `bugfix/...`
+- Relatório PDF/MD com:
+  - Stack detectado
+  - Lista de erros (por ficheiro/linha)
+  - Lista de correções aplicadas (com before/after code snippets)
+  - Logs de lint/test/build
+  - Instruções de teste manual
+  - Comandos de rollback
+- Lista de variáveis de ambiente necessárias (nome e exemplo)
+- Se criaste novos testes: relatório de cobertura (linha e unitários)
+
+COMANDOS EXACTOS A EXECUTAR LOCALMENTE/NO AMBIENTE (usa estes comandos e reporta output):
+- `git checkout -b bugfix/replit-ai-<YYYYMMDD-HHMMSS>`
+- `git status`
+- `npm ci` ou `yarn install`
+- `npm run lint` (ou `npx eslint .`)
+- `npm run test -- --coverage`
+- `npm run build`
+- `npm start` (ou comando equivalente para correr localmente)
+- Para TypeScript: `npx tsc --noEmit`
+
+COMPORTAMENTO DE ERRO
+- Se qualquer build/test falhar após correção, reverte a última alteração e documenta a tentativa, explica o porquê, e tenta uma alternativa segura.
+- Não faças merge sem que todos os testes e builds passem.
+
+COMUNICAÇÃO
+- Antes de abrir o PR, envia-me um resumo curto com as 5 mudanças mais críticas que fizeste e se existe algum ponto que eu deva validar manualmente.
+
+Fim do pedido.  
+Responde apenas: "Pronto para analisar o projecto" se compreendeste e vais iniciar o processo.

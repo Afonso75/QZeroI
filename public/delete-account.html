@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar Conta - QZero</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      max-width: 480px;
+      width: 100%;
+      padding: 40px;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo h1 {
+      font-size: 32px;
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+    
+    .logo span {
+      color: #dc2626;
+    }
+    
+    h2 {
+      color: #dc2626;
+      font-size: 24px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .warning {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .warning p {
+      color: #991b1b;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .warning ul {
+      margin-top: 12px;
+      margin-left: 20px;
+      color: #991b1b;
+      font-size: 14px;
+    }
+    
+    .warning li {
+      margin-bottom: 6px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+    
+    .btn-danger:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #374151;
+      margin-top: 12px;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .message {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .message.success {
+      background: #d1fae5;
+      border: 1px solid #6ee7b7;
+      color: #065f46;
+      display: block;
+    }
+    
+    .message.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      display: block;
+    }
+    
+    .confirm-section {
+      display: none;
+    }
+    
+    .confirm-section.active {
+      display: block;
+    }
+    
+    .request-section.hidden {
+      display: none;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .footer a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <h1>Q<span>Zero</span></h1>
+    </div>
+    
+    <div id="message" class="message"></div>
+    
+    <!-- Formulário de Pedido (quando não há token) -->
+    <div id="request-section" class="request-section">
+      <h2>Eliminar Conta</h2>
+      
+      <div class="warning">
+        <p><strong>Atenção:</strong> A eliminação da conta é permanente e irreversível.</p>
+        <ul>
+          <li>Todos os seus dados pessoais serão eliminados</li>
+          <li>O perfil empresarial será removido</li>
+          <li>A subscrição será cancelada</li>
+          <li>O histórico será perdido permanentemente</li>
+        </ul>
+      </div>
+      
+      <form id="request-form">
+        <div class="form-group">
+          <label for="email">Email da conta</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="reason">Razão (opcional)</label>
+          <select id="reason" name="reason">
+            <option value="">Selecione uma razão...</option>
+            <option value="no_longer_needed">Já não preciso do serviço</option>
+            <option value="privacy_concerns">Preocupações com privacidade</option>
+            <option value="switching_service">Vou usar outro serviço</option>
+            <option value="too_expensive">Muito caro</option>
+            <option value="difficult_to_use">Difícil de usar</option>
+            <option value="other">Outra razão</option>
+          </select>
+        </div>
+        
+        <div class="form-group" id="other-reason-group" style="display: none;">
+          <label for="other-reason">Especifique a razão</label>
+          <textarea id="other-reason" name="other_reason" placeholder="Diga-nos porquê..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-danger" id="request-btn">
+          Solicitar Eliminação
+        </button>
+      </form>
+      
+      <div class="footer">
+        <a href="/">Voltar para a página inicial</a>
+      </div>
+    </div>
+    
+    <!-- Formulário de Confirmação (quando há token) -->
+    <div id="confirm-section" class="confirm-section">
+      <h2>Confirmar Eliminação</h2>
+      
+      <div class="warning">
+        <p><strong>Último aviso:</strong> Ao clicar em "Confirmar Eliminação", a sua conta e todos os dados associados serão eliminados permanentemente.</p>
+      </div>
+      
+      <p style="margin-bottom: 20px; color: #374151;">
+        Email: <strong id="confirm-email"></strong>
+      </p>
+      
+      <button type="button" class="btn btn-danger" id="confirm-btn">
+        Confirmar Eliminação Permanente
+      </button>
+      
+      <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">
+        Cancelar - Manter Conta
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    const API_BASE = '';
+    
+    // Verificar se há token na URL (confirmação via email)
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const emailFromUrl = urlParams.get('email');
+    
+    const requestSection = document.getElementById('request-section');
+    const confirmSection = document.getElementById('confirm-section');
+    const messageDiv = document.getElementById('message');
+    const reasonSelect = document.getElementById('reason');
+    const otherReasonGroup = document.getElementById('other-reason-group');
+    
+    // Mostrar secção correcta
+    if (token && emailFromUrl) {
+      requestSection.classList.add('hidden');
+      confirmSection.classList.add('active');
+      document.getElementById('confirm-email').textContent = decodeURIComponent(emailFromUrl);
+    }
+    
+    // Mostrar/esconder campo de razão personalizada
+    reasonSelect.addEventListener('change', function() {
+      otherReasonGroup.style.display = this.value === 'other' ? 'block' : 'none';
+    });
+    
+    // Formulário de pedido
+    document.getElementById('request-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const btn = document.getElementById('request-btn');
+      const email = document.getElementById('email').value;
+      let reason = document.getElementById('reason').value;
+      
+      if (reason === 'other') {
+        reason = document.getElementById('other-reason').value || 'other';
+      }
+      
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> A enviar...';
+      
+      try {
+        const response = await fetch(API_BASE + '/api/auth/request-deletion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, reason })
+        });
+        
+        const data = await response.json();
+        
+        messageDiv.className = 'message success';
+        messageDiv.textContent = data.message || 'Pedido enviado! Verifique o seu email para confirmar.';
+        
+        document.getElementById('request-form').style.display = 'none';
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = 'Erro ao enviar pedido. Tente novamente.';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Solicitar Eliminação';
+      }
+    });
+    
+    // Botão de confirmação
+    document.getElementById('confirm-btn').addEventListener('click', async function() {
+      const btn = this;
+      
+      if (!confirm('TEM A CERTEZA ABSOLUTA? Esta ação é IRREVERSÍVEL!')) {
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> A eliminar...';
+      
+      try {
+        const response = await fetch(API_BASE + '/api/auth/confirm-deletion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            token: token,
+            email: decodeURIComponent(emailFromUrl)
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          messageDiv.className = 'message success';
+          messageDiv.textContent = data.message || 'Conta eliminada com sucesso.';
+          confirmSection.innerHTML = `
+            <h2 style="color: #059669;">Conta Eliminada</h2>
+            <p style="text-align: center; margin: 20px 0; color: #374151;">
+              A sua conta foi eliminada permanentemente.<br>
+              Todos os dados foram removidos.
+            </p>
+            <a href="/" class="btn btn-secondary" style="display: block; text-align: center; text-decoration: none;">
+              Voltar à Página Inicial
+            </a>
+          `;
+        } else {
+          throw new Error(data.error || 'Erro ao eliminar conta');
+        }
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = error.message || 'Erro ao eliminar conta. O link pode ter expirado.';
+        btn.disabled = false;
+        btn.textContent = 'Confirmar Eliminação Permanente';
+      }
+    });
+  </script>
+</body>
+</html>

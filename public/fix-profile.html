@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corrigir Perfil da Empresa</title>
+    <style>
+        body { font-family: system-ui; padding: 40px; background: #f0f4f8; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2563eb; }
+        button { background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; margin: 10px 5px; }
+        button:hover { background: #1d4ed8; }
+        .success { background: #10b981; }
+        .danger { background: #ef4444; }
+        pre { background: #f1f5f9; padding: 15px; border-radius: 6px; overflow: auto; font-size: 12px; }
+        .info { background: #dbeafe; border-left: 4px solid #2563eb; padding: 15px; margin: 20px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Corrigir Perfil da Empresa</h1>
+        
+        <div class="info">
+            <strong>Problema identificado:</strong><br>
+            O perfil da empresa existe e está ativo, mas pertence a um email diferente do utilizador atual.
+        </div>
+        
+        <button onclick="fixProfile()" class="success">✅ Corrigir Agora</button>
+        <button onclick="showStatus()">📊 Ver Estado</button>
+        <button onclick="goHome()">🏠 Ir para Início</button>
+        
+        <div id="output" style="margin-top: 20px;"></div>
+    </div>
+    
+    <script>
+        function showStatus() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            let html = '<h3>📊 Estado Atual</h3>';
+            html += '<pre>';
+            html += '=== UTILIZADOR ===\n';
+            html += `Email: ${user.email}\n`;
+            html += `Has Subscription: ${user.has_business_subscription}\n`;
+            html += `Business ID: ${user.business_id}\n\n`;
+            
+            html += '=== PERFIS DE EMPRESA ===\n';
+            profiles.forEach(p => {
+                html += `\nNome: ${p.companyName}\n`;
+                html += `ID: ${p.id}\n`;
+                html += `Status: ${p.status}\n`;
+                html += `Admin: ${p.adminUserId}\n`;
+            });
+            html += '</pre>';
+            
+            document.getElementById('output').innerHTML = html;
+        }
+        
+        function fixProfile() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            if (!user.email) {
+                alert('❌ Nenhum utilizador encontrado!');
+                return;
+            }
+            
+            // Procurar perfil ativo
+            const activeProfile = profiles.find(p => p.status === 'active');
+            
+            if (!activeProfile) {
+                alert('❌ Nenhum perfil ativo encontrado!');
+                return;
+            }
+            
+            // CORRIGIR: Atualizar o email do admin do perfil
+            activeProfile.adminUserId = user.email;
+            
+            // Guardar perfis atualizados
+            localStorage.setItem('company_profiles', JSON.stringify(profiles));
+            
+            // Atualizar utilizador com flags corretas
+            user.has_business_subscription = true;
+            user.business_profile_completed = true;
+            user.business_id = activeProfile.id;
+            user.account_type = 'empresa';
+            
+            localStorage.setItem('mock_user', JSON.stringify(user));
+            
+            let html = '<div style="background: #d1fae5; border: 2px solid #10b981; padding: 20px; border-radius: 8px; margin-top: 20px;">';
+            html += '<h3 style="color: #065f46; margin-top: 0;">✅ Perfil Corrigido com Sucesso!</h3>';
+            html += '<p><strong>Perfil:</strong> ' + activeProfile.companyName + '</p>';
+            html += '<p><strong>Agora pertence a:</strong> ' + user.email + '</p>';
+            html += '<p><strong>Status:</strong> Ativo com subscrição paga</p>';
+            html += '<p style="margin-bottom: 0;">A redirecionar para o dashboard em 3 segundos...</p>';
+            html += '</div>';
+            
+            document.getElementById('output').innerHTML = html;
+            
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 3000);
+        }
+        
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // Mostrar estado ao carregar
+        showStatus();
+    </script>
+</body>
+</html>

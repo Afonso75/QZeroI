@@ -1,0 +1,43 @@
+Este é o projeto “QZero”, originalmente criado na plataforma Base44 e agora importado para o Replit. 
+A importação deixou vários erros, ficheiros corrompidos, dependências partidas e funcionalidades incompletas. 
+Preciso que tornes toda a aplicação 100% funcional.
+
+Requisitos do projeto:
+- Sistema de utilizador normal + sistema de empresa.
+- Empresas só podem aceder às funcionalidades depois de pagarem o plano empresarial.
+- Subscrição empresarial: 49,99€/mês via Stripe.
+- Perfil da empresa obrigatório após escolha do tipo de conta.
+- Se não pagar, deve aparecer sempre a página do plano até completar o pagamento.
+- Existem funcionalidades de filas virtuais e marcações.
+- A app deve mostrar empresas por localização (país + proximidade).
+- O projeto pode ter dependências próprias da Base44 (VITE_BASE44_APP_ID etc) que precisam de ser removidas ou substituídas.
+
+Tarefas que preciso que executes AGORA:
+
+1. Lê todos os ficheiros do projeto no workspace.
+2. Identifica e lista todos os erros de:
+   - importações quebradas
+   - rotas
+   - dependências
+   - lógica de autenticação
+   - dados do utilizador e empresa
+   - componentes React
+   - chamadas API ou funções backend
+   - variáveis de ambiente relacionadas com a Base44
+3. Corrige automaticamente TUDO o que estiver errado.
+4. Remove ou converte qualquer dependência da Base44 (ex: VITE_BASE44_APP_ID).
+5. Reconstrói qualquer ficheiro incompleto ou desformatado.
+6. Garante que:
+   - a criação de conta funciona
+   - a seleção do tipo de conta funciona
+   - o perfil da empresa é criado corretamente
+   - Stripe está configurado ou preparado para configuração manual
+   - bloqueio de acesso antes de pagar funciona
+   - a lógica de geolocalização está operacional (ou cria estrutura para implementar)
+   - filas virtuais e marcações funcionam sem erros
+7. Se faltar algum ficheiro essencial (auth, api, hooks, context, services, etc), cria-o.
+8. Diz-me exatamente quais correções fizeste e porquê.
+9. No final, deixa o projeto a correr sem erros no console.
+
+Quando estiveres pronto, responde: 
+“Pronto para analisar todos os ficheiros do QZero”.

@@ -1,0 +1,103 @@
+Quero que aumentes ao máximo a segurança de TODA a aplicação — backend, frontend, API, base de dados, autenticação e comunicações — sem alterar a lógica principal e SEM quebrar nada do que já existe.
+
+Segue 100% as regras abaixo:
+
+────────────────────────────────────────
+REGRAS GERAIS (OBRIGATÓRIAS)
+────────────────────────────────────────
+1. NÃO podes apagar ou reescrever ficheiros existentes sem justificar.
+2. NÃO podes alterar endpoints, rotas ou lógica crítica a não ser que exista vulnerabilidade comprovada.
+3. TODAS as melhorias têm de ser compatíveis com o meu stack.
+4. Tens de verificar a aplicação LINHA A LINHA, incluindo:
+   - API
+   - autenticação
+   - validação de dados
+   - base de dados
+   - cookies
+   - uploads
+   - permissões
+   - chamadas externas
+5. NADA pode quebrar o funcionamento atual.
+
+────────────────────────────────────────
+OBJETIVO
+────────────────────────────────────────
+Quero que a aplicação fique com segurança de nível profissional:
+- Proteção contra ataques comuns (XSS, CSRF, SQL Injection, NoSQL Injection, LFI, RCE).
+- Hardening de headers.
+- Proteger sessões e tokens.
+- Proteger uploads.
+- Sanitizar todas as entradas.
+- Proteger o backend contra brute-force e spam.
+- Proteção contra acessos indevidos.
+- Bloquear endpoints sensíveis.
+- Criar logs de segurança.
+- Garantir encriptação end-to-end.
+
+────────────────────────────────────────
+TAREFAS OBRIGATÓRIAS QUE DEVE FAZER
+────────────────────────────────────────
+
+FASE 1 — Auditoria de Segurança
+1. Analisa cada ficheiro do projeto linha por linha.
+2. Identifica vulnerabilidades.
+3. Documenta cada falha encontrada antes de corrigir.
+
+FASE 2 — Segurança Backend
+1. Implementar Helmet com configurações avançadas.
+2. Ativar CORS restritivo (permitir apenas o domínio correto).
+3. Configurar rate-limit severo (bloquear brute-force).
+4. Implementar validação e sanitização em TODAS as rotas.
+5. Proteger contra SQL/NoSQL Injection.
+6. Encriptar todos os dados sensíveis.
+7. Garantir que tokens JWT:
+   - têm expiração curta
+   - usam secret forte
+   - são assinados corretamente
+8. Melhorar segurança das sessões se existirem.
+9. Remover qualquer console.log sensível.
+10. Obfuscar erros críticos (não expor stack trace).
+
+FASE 3 — Segurança Frontend
+1. Sanitizar conteúdos dinâmicos (evitar XSS).
+2. Proteger formulários.
+3. Impedir mensagens de erro sensíveis no UI.
+4. Remover qualquer credencial, key ou token do código.
+5. Proteger comunicações cliente → servidor.
+
+FASE 4 — Segurança de Uploads
+1. Garantir que apenas tipos permitidos entram.
+2. Garantir limites de tamanho.
+3. Guardar ficheiros em local seguro.
+4. Verificar se imagens não contêm código malicioso.
+5. Bloquear execução de ficheiros enviados.
+
+FASE 5 — Base de Dados
+1. Validar e sanitizar TODAS as queries.
+2. Adicionar limites em pesquisas, paginação e filtros.
+3. Criar index onde necessário para evitar DoS.
+4. Encriptar dados sensíveis (passwords, tokens, emails…).
+
+FASE 6 — Proteção de API
+1. Criar middleware que valide tokens em TODAS as rotas protegidas.
+2. Bloquear tentativas repetidas.
+3. Esconder headers e informação sensível.
+4. Implementar logs de segurança (tentativas falhadas, acessos suspeitos).
+
+FASE 7 — Comunicação Segura
+1. Forçar HTTPS em toda a comunicação.
+2. Configurar HSTS.
+3. Remover headers que revelam tecnologia usada.
+
+FASE 8 — Relatório Final
+Quero que entregues:
+1. Lista de vulnerabilidades encontradas.
+2. Lista das correções feitas.
+3. Código alterado (antes e depois).
+4. Instruções de como manter a segurança no futuro.
+5. Recomendações adicionais (ex.: firewall, WAF, Cloudflare, monitorização, backups).
+
+────────────────────────────────────────
+RESPONDE APENAS DESTA FORMA:
+“Segurança máxima aplicada” + relatório final.
+────────────────────────────────────────

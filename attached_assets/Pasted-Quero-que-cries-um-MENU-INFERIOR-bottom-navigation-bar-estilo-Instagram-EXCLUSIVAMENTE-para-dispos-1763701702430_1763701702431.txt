@@ -1,0 +1,107 @@
+Quero que cries um MENU INFERIOR (bottom navigation bar) estilo Instagram EXCLUSIVAMENTE para dispositivos móveis.
+Segue TODAS estas regras de forma extremamente rigorosa:
+
+📌 REGRAS FUNDAMENTAIS
+🔥 1. O menu SÓ PODE aparecer em dispositivos móveis
+
+Este ponto é obrigatório e não negociável:
+
+O menu NÃO pode aparecer no desktop.
+
+O menu NÃO pode aparecer em tablets grandes.
+
+O menu deve ativar-se apenas abaixo de 768px (ou breakpoint equivalente do meu framework).
+
+Se necessário, usar media query ou lógica condicional para garantir isto.
+
+Exemplo obrigatório:
+
+@media (min-width: 768px) {
+  .bottom-menu {
+    display: none;
+  }
+}
+
+📍 2. Posição do Menu
+
+Fixo na parte inferior da tela (bottom: 0).
+
+Sempre visível durante scroll.
+
+Deve funcionar com qualquer altura de ecrã mobile (iOS, Android).
+
+Deve respeitar o "safe-area" do iPhone (usar padding-bottom env(safe-area-inset-bottom)).
+
+🎨 3. Estilo do Menu (igual ao Instagram)
+
+Minimalista.
+
+Ícones outline e modernos.
+
+Menu com 5 ícones SEM TEXTO:
+
+Home
+
+Pesquisa/Explorar
+
+Criar/Adicionar
+
+Notificações
+
+Perfil
+
+Regras dos ícones:
+
+Apenas ícones (ZERO texto).
+
+Ícone ativo com destaque.
+
+Ícones inativos com tom cinza.
+
+Tamanho entre 22px e 28px.
+
+🔧 4. Estrutura Técnica do Menu
+
+Criar um componente isolado (ex.: MobileBottomNav).
+
+Importar apenas no layout principal.
+
+Não deve interferir com nenhuma funcionalidade existente.
+
+Não substituir nem alterar layouts já criados.
+
+A navegação deve detectar a rota atual para destacar o ícone ativo.
+
+🚫 5. PROIBIÇÕES IMPORTANTES
+
+Isto é obrigatório:
+
+Não podes alterar o layout do desktop.
+
+Não podes mover ou modificar outros componentes.
+
+Não podes alterar o estilo global da aplicação.
+
+Não podes reestruturar o projeto.
+
+Não podes adicionar texto nos botões.
+
+O menu deve ser uma adição, não uma modificação destrutiva.
+
+📦 6. Entregáveis obrigatórios
+
+Quero que me dês:
+
+O código completo do componente do menu.
+
+O CSS/SCSS dedicado ao menu, incluindo media queries.
+
+Instruções passo-a-passo de onde integrar o componente.
+
+Como destacar o ícone ativo com base na rota.
+
+Garantir 100% que só aparece em mobile.
+
+🎯 Objetivo final
+
+Criar um menu inferior moderno, estilo Instagram, totalmente funcional, leve, elegante e exclusivo para mobile, sem quebrar nada da aplicação atual.

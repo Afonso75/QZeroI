@@ -1,0 +1,194 @@
+/* ============================================
+   WhatsApp-Style Toast Notifications
+   Production-Ready with Full Accessibility
+   ============================================ */
+
+.whatsapp-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: whatsapp-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: calc(100vw - 32px);
+  margin: 0 16px 16px 16px;
+  min-height: 48px;
+}
+
+@keyframes whatsapp-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.whatsapp-toast[data-removed="true"] {
+  animation: whatsapp-slide-down 0.2s ease-out forwards;
+}
+
+@keyframes whatsapp-slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+}
+
+.whatsapp-toast-title {
+  flex: 1;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.whatsapp-toast-description {
+  opacity: 0.9;
+  font-size: 13px;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* Success Toast - Verde WhatsApp (WCAG AA compliant) */
+.whatsapp-toast-success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.whatsapp-toast-success svg {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Error Toast - Vermelho (WCAG AA compliant) */
+.whatsapp-toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.whatsapp-toast-error svg {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Warning Toast - Laranja/Amber escuro (WCAG AA compliant - white text on dark orange) */
+.whatsapp-toast-warning {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.whatsapp-toast-warning svg {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Info Toast - Azul (WCAG AA compliant) */
+.whatsapp-toast-info {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.whatsapp-toast-info svg {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Default Toast (sem tipo especificado) - Funciona em modo claro e escuro */
+.whatsapp-toast:not(.whatsapp-toast-success):not(.whatsapp-toast-error):not(.whatsapp-toast-warning):not(.whatsapp-toast-info) {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsive - Ajustes para telas pequenas */
+@media (max-width: 480px) {
+  .whatsapp-toast {
+    padding: 12px 16px;
+    font-size: 13px;
+    border-radius: 20px;
+    margin: 0 12px 12px 12px;
+    min-height: 44px;
+  }
+  
+  .whatsapp-toast svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .whatsapp-toast-title {
+    font-size: 13px;
+  }
+  
+  .whatsapp-toast-description {
+    font-size: 12px;
+  }
+}
+
+/* Safe area for iOS devices with notch/home indicator */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  [data-sonner-toaster] {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 70px) !important;
+  }
+}
+
+/* Ensure toasts appear above bottom navigation (80px height typical) */
+[data-sonner-toaster] {
+  bottom: 80px !important;
+  z-index: 9999 !important;
+}
+
+/* Focus styles for accessibility (keyboard navigation) */
+.whatsapp-toast:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-toast {
+    animation: none;
+  }
+  
+  .whatsapp-toast[data-removed="true"] {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .whatsapp-toast {
+    border: 2px solid #ffffff;
+  }
+  
+  .whatsapp-toast-success {
+    background: #16a34a;
+  }
+  
+  .whatsapp-toast-error {
+    background: #dc2626;
+  }
+  
+  .whatsapp-toast-warning {
+    background: #b45309;
+  }
+  
+  .whatsapp-toast-info {
+    background: #2563eb;
+  }
+}

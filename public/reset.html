@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset QZero - Nova Conta</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    p {
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    .btn-danger {
+      background: #dc3545;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    .info {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 16px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+    .info p {
+      margin: 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎭 Criar Nova Conta</h1>
+    <p>Escolhe uma opção para criar uma nova conta de teste no QZero.</p>
+    
+    <button class="btn" onclick="novaConta()">
+      👤 Nova Conta Pessoal
+    </button>
+    
+    <button class="btn" onclick="novaContaEmpresa()">
+      🏢 Nova Conta Empresarial
+    </button>
+    
+    <button class="btn" onclick="novaContaAmbos()">
+      ⚖️ Conta Ambos (Pessoal + Empresa)
+    </button>
+    
+    <button class="btn btn-danger" onclick="limparTudo()">
+      🧹 Limpar TUDO (Reset Completo)
+    </button>
+    
+    <div class="info">
+      <p><strong>Como funciona:</strong> Clica num botão, os dados serão criados automaticamente e serás redirecionado para o onboarding.</p>
+    </div>
+  </div>
+
+  <script>
+    function criarUtilizador(tipo) {
+      const user = {
+        id: 'user_' + Date.now(),
+        name: 'Novo Utilizador',
+        email: 'user' + Date.now() + '@example.com',
+        account_type: tipo,
+        onboarding_completed: false,
+        has_business_subscription: false,
+        business_profile_completed: false,
+        business_id: null,
+        is_business_user: false,
+        country: 'PT',
+        city: 'Lisboa',
+        latitude: 38.7223,
+        longitude: -9.1393,
+        profile_completed: false
+      };
+      
+      localStorage.clear();
+      localStorage.setItem('mock_user', JSON.stringify(user));
+      
+      alert('✅ Nova conta criada!\n\nEmail: ' + user.email + '\n\nVais ser redirecionado...');
+      
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    }
+    
+    function novaConta() {
+      criarUtilizador('pessoal');
+    }
+    
+    function novaContaEmpresa() {
+      criarUtilizador('empresa');
+    }
+    
+    function novaContaAmbos() {
+      criarUtilizador('ambos');
+    }
+    
+    function limparTudo() {
+      if (!confirm('⚠️ Isto vai apagar TUDO!\n\nUtilizador, empresas, filas, senhas, marcações...\n\nTens a certeza?')) {
+        return;
+      }
+      
+      localStorage.clear();
+      alert('✅ Todos os dados foram apagados!\n\nVais ser redirecionado para uma aplicação limpa.');
+      
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    }
+  </script>
+</body>
+</html>

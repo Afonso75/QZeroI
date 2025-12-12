@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="HandheldFriendly" content="true" />
+    <title>QZero - Gestão de Filas</title>
+    <!-- Build: 2025-11-30 v1.5.5 - Zoom Fix -->
+    <style>
+      /* Prevent zoom on iOS/Android - scoped to interactive elements only */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      body {
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Prevent zoom on input focus (iOS requires 16px minimum) */
+      input, select, textarea, button, a, [role="button"] {
+        font-size: 16px !important;
+        touch-action: manipulation;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

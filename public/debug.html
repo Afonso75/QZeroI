@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - Estado do Utilizador</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #fff; }
+        h2 { color: #4fc3f7; }
+        pre { background: #2d2d2d; padding: 15px; border-radius: 5px; overflow: auto; }
+        .section { margin-bottom: 30px; }
+        button { background: #4fc3f7; color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #67d4ff; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug - Estado do Sistema</h1>
+    
+    <div class="section">
+        <h2>Ações Rápidas</h2>
+        <button onclick="showState()">Mostrar Estado Atual</button>
+        <button onclick="fixUserAfterPayment()">Corrigir Utilizador Pós-Pagamento</button>
+        <button onclick="clearAll()">Limpar Tudo</button>
+    </div>
+    
+    <div id="output"></div>
+    
+    <script>
+        function showState() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            let html = '<div class="section"><h2>👤 Utilizador</h2><pre>';
+            html += JSON.stringify(user, null, 2);
+            html += '</pre></div>';
+            
+            html += '<div class="section"><h2>🏢 Perfis de Empresa</h2>';
+            if (profiles.length === 0) {
+                html += '<p>Nenhum perfil encontrado</p>';
+            } else {
+                profiles.forEach(p => {
+                    html += '<pre>';
+                    html += `Nome: ${p.companyName}\n`;
+                    html += `ID: ${p.id}\n`;
+                    html += `Status: ${p.status}\n`;
+                    html += `Admin: ${p.adminUserId}\n`;
+                    html += `Features Enabled: ${p.featuresEnabled}\n`;
+                    html += `Subscription Status: ${p.subscriptionStatus}\n`;
+                    html += '</pre>';
+                });
+            }
+            html += '</div>';
+            
+            document.getElementById('output').innerHTML = html;
+        }
+        
+        function fixUserAfterPayment() {
+            const user = JSON.parse(localStorage.getItem('mock_user') || '{}');
+            const profiles = JSON.parse(localStorage.getItem('company_profiles') || '[]');
+            
+            if (profiles.length === 0) {
+                alert('❌ Nenhum perfil de empresa encontrado!');
+                return;
+            }
+            
+            // Procurar perfil ativo
+            const activeProfile = profiles.find(p => p.status === 'active');
+            
+            if (!activeProfile) {
+                alert('❌ Nenhum perfil ativo encontrado! Status dos perfis: ' + profiles.map(p => p.status).join(', '));
+                return;
+            }
+            
+            // Atualizar utilizador
+            user.has_business_subscription = true;
+            user.business_profile_completed = true;
+            user.business_id = activeProfile.id;
+            user.account_type = 'empresa';
+            user.onboarding_completed = true;
+            
+            localStorage.setItem('mock_user', JSON.stringify(user));
+            
+            alert('✅ Utilizador corrigido!\n\nAtualizações:\n- has_business_subscription: true\n- business_profile_completed: true\n- business_id: ' + activeProfile.id);
+            
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 2000);
+        }
+        
+        function clearAll() {
+            if (confirm('Tem certeza que quer limpar TODOS os dados?')) {
+                localStorage.clear();
+                alert('✅ Dados limpos! A página será recarregada.');
+                window.location.reload();
+            }
+        }
+        
+        // Mostrar estado automaticamente ao carregar
+        showState();
+    </script>
+</body>
+</html>

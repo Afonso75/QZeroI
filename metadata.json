@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "platforms": {
+    "ios": {
+      "bundleId": "com.qzero.app",
+      "version": "1.0.0",
+      "build": "1"
+    },
+    "android": {
+      "packageName": "com.qzero.app",
+      "versionCode": 1,
+      "versionName": "1.0.0"
+    }
+  },
+  "languages": {
+    "pt": {
+      "title": "QZero - Gest\u00e3o de Filas",
+      "subtitle": "Gerencie filas e agendamentos",
+      "description": "QZero \u00e9 a solu\u00e7\u00e3o completa para gest\u00e3o de filas e agendamentos. Elimine filas f\u00edsicas, melhore a experi\u00eancia do cliente e otimize as opera\u00e7\u00f5es do seu neg\u00f3cio com ferramentas de gest\u00e3o em tempo real, notifica\u00e7\u00f5es autom\u00e1ticas e an\u00e1lise de dados.",
+      "keywords": [
+        "fila",
+        "agendamento",
+        "gest\u00e3o",
+        "neg\u00f3cio",
+        "senhas",
+        "marca\u00e7\u00f5es",
+        "atendimento",
+        "cliente",
+        "tempo real",
+        "notifica\u00e7\u00f5es"
+      ],
+      "shortDescription": "Gest\u00e3o inteligente de filas e agendamentos para o seu neg\u00f3cio",
+      "whatsNew": "Vers\u00e3o inicial com suporte multi-idioma e gest\u00e3o completa de filas",
+      "promotional": "Transforme a experi\u00eancia dos seus clientes com gest\u00e3o inteligente de filas"
+    },
+    "en": {
+      "title": "QZero - Queue Management",
+      "subtitle": "Manage queues and appointments",
+      "description": "QZero is the complete solution for queue and appointment management. Eliminate physical queues, improve customer experience and optimize your business operations with real-time management tools, automatic notifications and data analysis.",
+      "keywords": [
+        "queue",
+        "appointment",
+        "management",
+        "business",
+        "tickets",
+        "scheduling",
+        "service",
+        "customer",
+        "real-time",
+        "notifications"
+      ],
+      "shortDescription": "Smart queue and appointment management for your business",
+      "whatsNew": "Initial release with multi-language support and complete queue management",
+      "promotional": "Transform your customers' experience with smart queue management"
+    },
+    "es": {
+      "title": "QZero - Gesti\u00f3n de Colas",
+      "subtitle": "Gestiona colas y citas",
+      "description": "QZero es la soluci\u00f3n completa para la gesti\u00f3n de colas y citas. Elimine las colas f\u00edsicas, mejore la experiencia del cliente y optimice las operaciones de su negocio con herramientas de gesti\u00f3n en tiempo real, notificaciones autom\u00e1ticas y an\u00e1lisis de datos.",
+      "keywords": [
+        "cola",
+        "cita",
+        "gesti\u00f3n",
+        "negocio",
+        "turnos",
+        "programaci\u00f3n",
+        "servicio",
+        "cliente",
+        "tiempo real",
+        "notificaciones"
+      ],
+      "shortDescription": "Gesti\u00f3n inteligente de colas y citas para su negocio",
+      "whatsNew": "Versi\u00f3n inicial con soporte multi-idioma y gesti\u00f3n completa de colas",
+      "promotional": "Transforme la experiencia de sus clientes con gesti\u00f3n inteligente de colas"
+    },
+    "fr": {
+      "title": "QZero - Gestion de Files",
+      "subtitle": "G\u00e9rer files et rendez-vous",
+      "description": "QZero est la solution compl\u00e8te pour la gestion des files d'attente et des rendez-vous. \u00c9liminez les files physiques, am\u00e9liorez l'exp\u00e9rience client et optimisez les op\u00e9rations de votre entreprise avec des outils de gestion en temps r\u00e9el, des notifications automatiques et l'analyse de donn\u00e9es.",
+      "keywords": [
+        "file",
+        "rendez-vous",
+        "gestion",
+        "entreprise",
+        "tickets",
+        "planification",
+        "service",
+        "client",
+        "temps r\u00e9el",
+        "notifications"
+      ],
+      "shortDescription": "Gestion intelligente des files et rendez-vous pour votre entreprise",
+      "whatsNew": "Version initiale avec support multilingue et gestion compl\u00e8te des files",
+      "promotional": "Transformez l'exp\u00e9rience de vos clients avec une gestion intelligente des files"
+    }
+  },
+  "screenshots": {
+    "pt": [],
+    "en": [],
+    "es": [],
+    "fr": []
+  },
+  "supportedCountries": [
+    "PT", "ES", "FR", "GB", "DE", "IT", "NL", "BE", "CH", "AT",
+    "LU", "IE", "SE", "NO", "DK", "FI", "PL", "CZ", "GR", "RO",
+    "HU", "BG", "HR", "CY", "EE", "LV", "LT", "MT", "SK", "SI",
+    "GI", "LI", "US", "CA", "AU", "NZ", "SG", "HK", "JP", "MY",
+    "TH", "TW", "AE", "BR", "MX", "CL", "CO"
+  ]
+}

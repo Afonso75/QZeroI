@@ -1,0 +1,106 @@
+Quero que integres um sistema completo de MULTI-IDIOMA na aplicação e tornes a app preparada para operar apenas nos países suportados pela Stripe. Segue estas instruções de forma rigorosa e sem alterar funcionalidades existentes.
+
+──────────────────────────────
+REGRAS IMPORTANTES
+──────────────────────────────
+1. NÃO alterar lógica de negócio.
+2. NÃO remover código já existente.
+3. NÃO mudar rotas, API, base de dados ou autenticação sem necessidade.
+4. Toda a implementação deve ser modular e compatível com a estrutura atual.
+
+──────────────────────────────
+OBJETIVOS
+──────────────────────────────
+✔ Suporte a múltiplos idiomas dentro da app.
+✔ Os idiomas devem ser carregados a partir de ficheiros externos JSON.
+✔ Detetar idioma automaticamente com fallback para inglês.
+✔ Permitir seleção manual de idioma no menu de definições.
+✔ Adaptar disponibilidade e lógica de países com base nos países suportados pela Stripe.
+✔ Preparar tudo para publicação nas stores com idiomas múltiplos (App Store + Google Play).
+
+──────────────────────────────
+MULTI-IDIOMA (IMPLEMENTAÇÃO INTERNA)
+──────────────────────────────
+Cria um sistema de internacionalização usando i18n baseado no stack existente (React, Vue ou outro — detecta automaticamente). Ele deve:
+
+- Carregar ficheiros JSON estruturados assim:
+
+/locales
+   /pt
+      translation.json
+   /en
+      translation.json
+   /es
+      translation.json
+   /fr
+      translation.json
+
+- Cada JSON deve conter todas as strings dinâmicas da UI.
+- Nada de texto hardcoded nos componentes → substituir por chaves de tradução.
+- Detetar idioma padrão via `navigator.language`.
+- Guardar idioma escolhido no perfil do utilizador ou localStorage.
+- Adicionar função global `changeLanguage()`.
+
+NÃO alterar textos de API, apenas UI.
+
+──────────────────────────────
+IDIOMAS OBRIGATÓRIOS AGORA
+──────────────────────────────
+- pt-PT (padrão)
+- en
+- es
+- fr
+
+──────────────────────────────
+DISPONIBILIDADE POR PAÍS (STRIPE)
+──────────────────────────────
+- Criar uma lista `SUPPORTED_COUNTRIES` com todos os países onde a Stripe está disponível.
+- Se o utilizador estiver num país fora da lista, mostrar:
+  "Pagamentos indisponíveis no seu país"
+- Para empresas, só permitir ativação de pagamentos se o país estiver na lista Stripe.
+- A app NÃO pode mostrar opção de pagamentos para países não suportados.
+
+──────────────────────────────
+AJUSTES PARA AS STORES
+──────────────────────────────
+Preparar metadados para publicação multilíngua:
+
+- Apple App Store → Nome, Descrição, Keywords, Screenshots por idioma
+- Google Play → Título, Short Description, Long Description por idioma
+
+A app deve exportar um ficheiro `metadata.json` com estrutura pronta para inserir nas stores:
+
+{
+  "pt": {
+    "title": "...",
+    "description": "...",
+    "keywords": [...]
+  },
+  "en": { ... },
+  "es": { ... },
+  "fr": { ... }
+}
+
+──────────────────────────────
+INPUTS & DETEÇÃO DE PAÍS
+──────────────────────────────
+- Usar geolocalização baseada em API externa OU país definido no perfil.
+- Nunca depender apenas da língua para determinar país.
+- Criar função:
+
+getUserCountry() → retorna código ISO-3166 (ex.: "PT", "US", "FR")
+
+──────────────────────────────
+ENTREGÁVEIS OBRIGATÓRIOS
+──────────────────────────────
+1. Código completo adicionado ao projeto.
+2. Ficheiros JSON criados com valores placeholder.
+3. Lista final de países suportados pelo Stripe.
+4. Documentação de como adicionar novos idiomas.
+5. Alterações feitas de forma modular sem quebrar nada existente.
+6. Testes básicos para garantir que cada idioma carrega sem erros.
+
+──────────────────────────────
+ANTES DE COMEÇAR RESPONDE COM:
+"Pronto para integrar multi-idioma e restrições Stripe"
+──────────────────────────────
